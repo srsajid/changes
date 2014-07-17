@@ -16,12 +16,13 @@ Class AccountController extends BaseController{
 
     public function logout() {
        Auth::logout();
-       return Redirect::to("login");
+       return Redirect::to("/");
     }
 
     public function admin() {
         $menus = Menu::all();
-        return View::make("admin.cms", array('menus' => $menus));
+        $user = Auth::user();
+        return View::make("admin.cms", array('menus' => $menus, 'user' => $user));
     }
 
     public function postSignIn(){

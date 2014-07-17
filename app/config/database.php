@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'local',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -64,10 +64,10 @@ return array(
 		),
         'local' => array(
 			'driver'    => 'mysql',
-			'host'      => 'tunnel.pagodabox.com:3306',
-			'database'  => 'krystina',
-			'username'  => 'whitney',
-			'password'  => 'yb8HlVzt',
+			'host'      => '127.0.0.1',
+			'database'  => 'laravel',
+			'username'  => 'root',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

@@ -36,6 +36,16 @@
 <body>
     <div id="admin-panel-container">
         <div class="container-fluid">
+            <div class="row top-header">
+                <div class="navbar-right">
+                    <span>Hi <?php echo $user->getFullName(); ?></span>
+                    <a href="<?php echo(OSMS::$baseUrl);?>logout">
+                        <button class="btn btn-xs" title="Logout">
+                            <span class="glyphicon glyphicon-off"></span>
+                        </button>
+                    </a>
+                </div>
+            </div>
             <div class="row navigation osms-navigation">
                 <nav class="navbar navbar-inverse" role="navigation">
                     <div class="navbar-header">

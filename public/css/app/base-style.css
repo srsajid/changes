@@ -1,7 +1,10 @@
 #admin-panel-container {
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 20px;
+    margin-top: 5px;
+}
+.osms-navigation {
+    margin-top: 5px;
 }
 .ribbon-menu-btn {
     line-height: 2.5;
