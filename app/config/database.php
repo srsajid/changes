@@ -54,6 +54,16 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'changess_osms',
+			'username'  => 'changess_root',
+			'password'  => 'p@ssw0rd',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+        'local' => array(
+			'driver'    => 'mysql',
 			'host'      => 'tunnel.pagodabox.com:3306',
 			'database'  => 'krystina',
 			'username'  => 'whitney',
