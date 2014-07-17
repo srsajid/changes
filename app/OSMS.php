@@ -1,6 +1,6 @@
 <?php
 class OSMS {
-    static public $baseUrl = "/changes/public/";
+    static public $baseUrl = "/";
 
     static $NAV_MENU = array(
         'admission' => "Admission",
