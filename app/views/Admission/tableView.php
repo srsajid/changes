@@ -1,7 +1,7 @@
 <div class="head">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand">Title</a>
+            <a class="navbar-brand">dfd</a>
         </div>
         <div>
             <div class="navbar-form navbar-right" role="search">
