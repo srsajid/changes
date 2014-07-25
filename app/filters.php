@@ -86,18 +86,18 @@ Route::filter('csrf', function()
 
 Route::filter('super_admin', function(){
     if(!Auth::check() || Auth::user()->weight < 5) {
-        return array('status' => 'error', 'message' => 'You do not have right permission');
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
     }
 });
 
 Route::filter('admin', function(){
     if(!Auth::check() || Auth::user()->weight < 4) {
-        return array('status' => 'error', 'message' => 'You do not have right permission');
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
     }
 });
 
 Route::filter('normal', function(){
     if(!Auth::check() || Auth::user()->weight < 3) {
-        return array('status' => 'error', 'message' => 'You do not have right permission');
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
     }
 });

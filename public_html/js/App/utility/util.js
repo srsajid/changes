@@ -137,6 +137,12 @@ var util = {
             dataType: 'html',
             type: "GET"
         };
+        var _errorFunc = settings.error;
+        settings.error = function(xhr, status, resp) {
+            if(_errorFunc) {
+                _errorFunc(xhr, xhr.status, xhr.responseText)
+            }
+        }
         $.extend(defaults, settings);
         $.ajax(defaults);
     },
@@ -202,8 +208,10 @@ var util = {
                 }
                 events();
             },
-            error: function() {
-                //TODO:
+            error: function(xgr, status, resp) {
+               var message = status == 401 ? JSON.parse(resp).message : "Unexpected Error Occurred";
+               util.notify(message)
+                dom.dialog("close");
             }
         })
         function events() {
@@ -229,7 +237,6 @@ var util = {
                             }
                         },
                         error: function(a, b, resp){
-                            console.log("form error")
                             _self.notify(resp.message, "error");
                             if(typeof defaults.error == "function") {
                                 defaults['error'](resp);
