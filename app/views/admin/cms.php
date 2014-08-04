@@ -30,6 +30,7 @@
     <script src="js/App/tabs/Sells-tab.js"></script>
     <script src="js/App/tabs/admission-tab.js"></script>
     <script src="js/App/tabs/user-tab.js"></script>
+    <script src="js/App/tabs/beneficiary-tab.js"></script>
 
 </head>
 
