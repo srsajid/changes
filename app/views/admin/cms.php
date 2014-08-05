@@ -45,6 +45,9 @@
                             <span class="glyphicon glyphicon-off"></span>
                         </button>
                     </a>
+                    <button class="btn btn-xs" title="Change Password" id="change-password-btn">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
                 </div>
             </div>
             <div class="row navigation osms-navigation">

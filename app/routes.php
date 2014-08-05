@@ -18,6 +18,9 @@ Route::post("login", "AccountController@login");
 Route::get("logout", "AccountController@logout");
 Route::get("/admin", array('as' => 'admin', 'uses' => "AccountController@admin"))->before("auth");
 
+Route::get("/account/change-pass", "AccountController@changePass")->before("normal");
+Route::post("/account/save-pass", "AccountController@savePass")->before("normal");
+
 Route::get("/admission", "AdmissionController@loadTable");
 Route::get("/admission/create", "AdmissionController@create");
 Route::post("/admission/save", "AdmissionController@save");

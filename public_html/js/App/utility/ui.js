@@ -24,6 +24,10 @@ $(function(){
         $(".ribbon-menu-btn-container").find("button").hide();
         $(".ribbon-menu-btn-container").find("[nav-menu='"+ type +"']").show();
     });
+    
     $(".osms-navigation ul.navbar-nav li:eq(0)").trigger("click");
+    $("#change-password-btn").on("click", function() {
+        util.editPopup("Change Password", App.baseUrl + "account/change-pass", {});
+    });
 
 })

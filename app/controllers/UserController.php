@@ -62,7 +62,7 @@ class UserController extends \BaseController {
             'weight' => 'required|numeric'
         );
         if(!$user->id) {
-            $user['password'] = 'required|min:8';
+            $rules['password'] = 'required|min:8';
         }
         $validator = Validator::make($inputs, $rules);
         if($validator->fails()) {

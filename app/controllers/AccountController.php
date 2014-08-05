@@ -25,33 +25,27 @@ Class AccountController extends BaseController{
         return View::make("admin.cms", array('menus' => $menus, 'user' => $user));
     }
 
-    public function postSignIn(){
-        $validator = Validator::make(Input::all(),
-            array(
-                'username' => 'required|email',
-                'password' => 'required'
-            )
-        );
-        if($validator->fails()){
-            return Redirect::route('sign-in')
-                ->withErrors($validator)
-                ->withInput();
+    public function changePass() {
+        return View::make("admin.changePass");
+    }
+
+    public function savePass() {
+        $user = Auth::user();
+        $inputs = Input::all();
+        if(!Hash::check($inputs["old_password"], $user->password)) {
+            return array('status' => 'error', 'message' => 'Old password did not match');
         }
-        else{
-            $auth = Auth::attempt(array(
-                    'username' => Input::get('username'),
-                    'password' => Input::get('password')
-                )
-            );
-            if($auth){
-                return Redirect::route('admin');
-            }
-            else{
-                return Redirect::route('')
-                    -> with('global','Wrong username and password.');
-            }
+
+        if(strcmp($inputs["password"], $inputs["confirm_password"]) != 0) {
+            return array('status' => 'error', 'message' => 'New Password and confirm password did not match');
         }
-        return Redirect::route('sign-in')
-            -> with('global','There was a problem singing in.');
+        $rules = array('password' => 'required|min:8');
+        $validator = Validator::make($inputs, $rules);
+        if($validator->fails()) {
+            return array('status' => 'error', 'message' => $validator->messages()->all());
+        }
+        $user->password = Hash::make($inputs["password"]);
+        $user->save();
+        return array('status' => 'success', 'message' => "Password has been changed successfully");
     }
 }
