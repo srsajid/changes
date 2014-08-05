@@ -18,50 +18,20 @@ class CategoryController extends BaseController {
 
 	public function save()
 	{
+        $id = Input::get("id");
         $name = Input::get("name");
-        $category = new Category();
+        $category = $id ? Category::find(intval($id)) : new Category();
         $category->name = $name;
         $category->save();
         return array('status' => 'success', 'message' => 'Category has been Successfully saved');
 	}
-	public function create()
-	{
+
+	public function create() {
        return View::make("category.edit");
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-        //$id = Input::has("id") ? intval(Input::get("id")) : null;
+	public function edit() {
+        $id = Input::has("id") ? intval(Input::get("id")) : null;
         $category = null;
         if($id) {
             $category = Category::find($id);
@@ -72,28 +42,4 @@ class CategoryController extends BaseController {
             'category' => $category,
         ));
 	}
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-
 }
