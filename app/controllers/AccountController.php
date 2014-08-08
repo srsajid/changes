@@ -7,11 +7,10 @@ Class AccountController extends BaseController{
         );
         if (Auth::attempt($user)) {
             return Redirect::route('admin')
-                ->with('flash_notice', 'You are successfully logged in.');
+                ->with('flash_success', 'You are successfully logged in.');
         }
-        return Redirect::route('login')
-            ->with('flash_error', 'Your username/password combination was incorrect.')
-            ->withInput();
+        return Redirect::to('/')
+            ->with('flash_error', 'Your username/password combination was incorrect.');
     }
 
     public function logout() {

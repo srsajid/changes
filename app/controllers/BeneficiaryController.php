@@ -8,7 +8,8 @@
 
 class BeneficiaryController extends \BaseController {
     public function __construct() {
-//        $this->beforeFilter('super_admin', array('except' => array("getTableView")));
+        $this->beforeFilter('super_admin', array('only' => array("getCreate", "postSave")));
+        $this->beforeFilter('admin', array('only' => array("postPaySalary", "getPaySalaryNextStep", "getPaySalaryForm", "getLoadTable")));
     }
 
     public function getLoadTable() {

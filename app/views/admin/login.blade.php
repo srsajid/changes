@@ -15,6 +15,9 @@
 <body>
 <!--login modal-->
 <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    @if($message != null)
+        <div class="alert alert-warning" role="alert" style="margin-top: 20px; text-align: center">{{$message}}</div>
+    @endif
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
