@@ -15,4 +15,11 @@ class OSMS {
         3 => 'Normal User',
         0 => ""
      );
+
+    static $BENEFICIARY_TYPE = array(
+        1 => "Chairman",
+        2 => "Director",
+        3 => "Teacher",
+        4 => "Staff"
+    );
 }

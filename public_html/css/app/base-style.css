@@ -6,6 +6,9 @@
 .osms-navigation {
     margin-top: 5px;
 }
+.osms-navigation li {
+    cursor: pointer;
+}
 .ribbon-menu-btn {
     line-height: 2.5;
     margin-right: 5px;
