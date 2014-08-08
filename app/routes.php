@@ -45,6 +45,7 @@ Route::post("/package/save", "PackageController@save");
 
 Route::controller('user', 'UserController');
 Route::controller('beneficiary', 'BeneficiaryController');
+Route::controller('salary', 'SalaryController');
 
 Route::get("test", function(){
     $ym = DateTime::createFromFormat('m/d/Y h:i:s', '10/16/2003 00:00:00')->format("y-m-d h:i:s");

@@ -11,8 +11,13 @@ $(function(){
     });
 
     App.tabs.tabs.delegate(".main-tab-header-container span.ui-icon-close", "click", function() {
-        var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+        var tabHeader = $( this ).closest( "li" )
+        var tabId = tabHeader.attr("tab-id");
+        var panelId = tabHeader.remove().attr( "aria-controls" );
         $( "#" + panelId ).remove();
+        if(App.tabs[tabId].onClose instanceof Function) {
+            App.tabs[tabId].onClose();
+        }
         App.tabs.tabs.tabs( "refresh" );
     });
 

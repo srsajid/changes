@@ -12,6 +12,9 @@ App.tabs.addToTab = function(tabId) {
         if(!url) {
             tabs.find(".main-tab-body-container").append('<div id="'+ panel +'"></div>');
         }
+        if(App.tabs[tabId].onCreate instanceof Function) {
+            App.tabs[tabId].onCreate();
+        }
         tabs.tabs("refresh");
     }
     this.active(tabId)

@@ -9,7 +9,7 @@
 class Salary extends Eloquent {
 
     public function givenBy() {
-        return $this->belongsTo("User");
+        return $this->belongsTo("User", "user_id");
     }
 
     public function beneficiary() {
