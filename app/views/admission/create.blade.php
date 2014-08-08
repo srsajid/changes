@@ -33,27 +33,27 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Student Name</label>
+        <label for="inputEmail3" class="col-sm-2 control-label">Student's Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="student_name" placeholder="Student Name">
+            <input type="text" class="form-control" name="student_name" placeholder="Student's Name">
         </div>
     </div>
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Fathers Name</label>
+        <label for="inputEmail3" class="col-sm-2 control-label">Father's Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="father_name" placeholder="Fathers Name">
+            <input type="text" class="form-control" name="father_name" placeholder="Father's Name">
         </div>
     </div>
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Mothers Name</label>
+        <label for="inputEmail3" class="col-sm-2 control-label">Mother's Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="mother_name" placeholder="Mothers Name">
+            <input type="text" class="form-control" name="mother_name" placeholder="Mother's Name">
         </div>
     </div>
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Guardian Name</label>
+        <label for="inputEmail3" class="col-sm-2 control-label">Guardian's Name</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="guardian_name" placeholder="Mothers Name">
+            <input type="text" class="form-control" name="guardian_name" placeholder="Guardian's Name">
         </div>
     </div>
     <div class="form-group">
@@ -74,7 +74,7 @@
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Nationality</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="nationality" placeholder="Nationality">
+            <input type="text" class="form-control" name="nationality" value="Bangladeshi" placeholder="Nationality">
         </div>
     </div>
     <div class="form-group">
@@ -108,6 +108,13 @@
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
+        </div>
+    </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Area</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control"  name="area" placeholder="Area">
         </div>
     </div>
     <div class="form-group">
