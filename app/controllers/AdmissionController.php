@@ -62,6 +62,15 @@ Class AdmissionController extends BaseController{
 
     public function save()
     {
+        $rules = array(
+            'student_ID' => 'required|AlphaNum|unique:students,sid',
+            'student_name' => 'required|Alpha'
+        );
+        $inputs = Input::all();
+        $validator = Validator::make($inputs, $rules);
+        if($validator->fails()) {
+            return array('status' => 'error', 'message' => $validator->messages()->all());
+        }
         $student_img = Input::file("student_image");
         $father_img = Input::file("father_image");
         $mother_img = Input::file("mother_image");
@@ -88,7 +97,7 @@ Class AdmissionController extends BaseController{
         $rsidsection = Input::get("rsidsection");
         $transportfee = Input::get("transportfee");
         $readm = Input::get("readmission");
-        $hasEntry = Student::find($student_id);
+        $hasEntry = Students::find($student_id);
         if($hasEntry){
             return array('status' => 'error', 'message' => 'Student exists!');
         }
