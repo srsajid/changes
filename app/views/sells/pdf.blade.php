@@ -108,12 +108,8 @@
             <span class="value">{{$sell->student_id}}</span>
         </div>
         <div class="info-view">
-            <label>Class:</label>
-            <span class="value">{{$sell->clazz}}</span>
-        </div>
-        <div class="info-view">
-            <label>Section:</label>
-            <span class="value">{{$sell->section}}</span>
+            <label>Mobile:</label>
+            <span class="value">{{$sell->mobile}}</span>
         </div>
     <?php } ?>
 

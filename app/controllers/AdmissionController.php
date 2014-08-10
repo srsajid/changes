@@ -64,7 +64,7 @@ Class AdmissionController extends BaseController{
     {
         $rules = array(
             'student_ID' => 'required|AlphaNum|unique:students,sid',
-            'student_name' => 'required|Alpha'
+            'student_name' => 'required'
         );
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);
@@ -76,6 +76,7 @@ Class AdmissionController extends BaseController{
         $mother_img = Input::file("mother_image");
         $guardian_img = Input::file("guardian_image");
         $id  = Input::get("id");
+        $area = Input::get("area");
         $student_id = Input::get("student_ID");
         $name = Input::get("student_name");
         $father_name = Input::get("father_name");
@@ -97,10 +98,7 @@ Class AdmissionController extends BaseController{
         $rsidsection = Input::get("rsidsection");
         $transportfee = Input::get("transportfee");
         $readm = Input::get("readmission");
-        $hasEntry = Students::find($student_id);
-        if($hasEntry){
-            return array('status' => 'error', 'message' => 'Student exists!');
-        }
+
         $absoulate_path = public_path();
         $path = $absoulate_path .'/Photos/'. $student_id .'/';
         $filenameS = null;
@@ -177,6 +175,7 @@ Class AdmissionController extends BaseController{
         $student->father_img = $full_nameF;
         $student->mother_img = $full_nameM;
         $student->guardian_img = $full_nameG;
+        $student->area = $area;
         if($transport == 'No'){
             $student->hasTransport = false;
         }
