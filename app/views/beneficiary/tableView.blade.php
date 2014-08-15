@@ -22,9 +22,10 @@
         <colgroup>
             <col style="width: 5%"/>
             <col style="width: 20%"/>
-            <col style="width: 20%"/>
-            <col style="width: 20%"/>
-            <col style="width: 20%"/>
+            <col style="width: 15%"/>
+            <col style="width: 15%"/>
+            <col style="width: 15%"/>
+            <col style="width: 15%"/>
             <col style="width: 15%"/>
         </colgroup>
         <thead>
@@ -53,6 +54,9 @@
                     </button>
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $beneficiary->id; ?>" action="pay-salary" title="Pay Salary">
                         <span class="glyphicon glyphicon-usd"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $beneficiary->id; ?>" action="give-loan" title="Give Loan">
+                        <span class="glyphicon glyphicon-indent-left"></span>
                     </button>
             </tr>
         <?php }); ?>

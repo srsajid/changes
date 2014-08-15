@@ -10,10 +10,10 @@ class LoanPaymentBack extends Eloquent {
     protected $table = "loan_payment_back";
 
     public function loan() {
-        return $this->belongsTo("LoanGiven");
+        return $this->belongsTo("LoanGiven", "load_given_id");
     }
 
     public function collect_by() {
-        return $this->belongsTo("User");
+        return $this->belongsTo("User", "user_id");
     }
 } 

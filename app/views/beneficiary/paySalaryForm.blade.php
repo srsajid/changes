@@ -14,13 +14,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">Name:</label>
+            <label class="col-sm-3 control-label">Month:</label>
             <div class="col-sm-8">
                 {{Form::selectMonth("month", null, array('class' => 'form-control'))}}
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">Name:</label>
+            <label class="col-sm-3 control-label">Year:</label>
             <div class="col-sm-8">
                 {{ Form::selectYear('year', 2013, 2015, null, array('class' => 'form-control')) }}
             </div>

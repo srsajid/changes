@@ -13,11 +13,11 @@ class LoanGiven extends Eloquent {
         return $this->hasMany("LoanPaymentBack");
     }
 
-    public function given_by() {
-        return $this->belongsTo("User");
+    public function givenBy() {
+        return $this->belongsTo("User", "user_id");
     }
 
-    public function given_to() {
-        return $this->belongsTo("Beneficiary");
+    public function givenTo() {
+        return $this->belongsTo("Beneficiary", "beneficiary_id");
     }
 } 

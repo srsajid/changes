@@ -14,7 +14,7 @@ class LoanGivenTable extends Migration {
 	    Schema::create("loan_given", function(Blueprint $table) {
             $table->increments("id");
             $table->double("amount");
-            $table->double("paid");
+            $table->double("paid")->nullable();
             $table->string("is_paid", 1);
             $table->integer("user_id")->unsigned();
             $table->integer("beneficiary_id")->unsigned();

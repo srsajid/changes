@@ -19,6 +19,9 @@ _b.onMenuOptionClick = function(action, data) {
             break;
         case "pay-salary":
             _self.paySalary(data.id);
+            break
+        case "give-loan":
+            _self.giveLoan(data.id);
             break;
     }
 }
@@ -83,4 +86,10 @@ _b.paySalary = function (id){
             App.global_event.trigger("salary-paid");
         }
     });
+}
+
+_b.giveLoan = function(id) {
+    util.editPopup("Give Loan", App.baseUrl + "loan/create", {
+        data: {beneficiaryId: id}
+    })
 }
