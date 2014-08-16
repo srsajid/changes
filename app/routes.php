@@ -43,6 +43,10 @@ Route::get("/package/loadTable", "PackageController@loadTable");
 Route::get("/package/create", "PackageController@create");
 Route::post("/package/save", "PackageController@save");
 
+Route::get("/expense/loadTable", "ExpenseController@loadTable");
+Route::get("/expense/create", "ExpenseController@create");
+Route::post("/expense/save", "ExpenseController@save");
+
 Route::controller('user', 'UserController');
 Route::controller('beneficiary', 'BeneficiaryController');
 Route::controller('salary', 'SalaryController');
