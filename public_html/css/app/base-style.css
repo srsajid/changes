@@ -203,6 +203,9 @@ body
 {
     color: #009;
 }
+tr.selected {
+    background-color: aqua;
+}
 .last {
     font-size: 14px;
     font-weight: normal;

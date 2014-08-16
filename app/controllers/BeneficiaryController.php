@@ -115,45 +115,48 @@ class BeneficiaryController extends \BaseController {
             $max = $loanPayment > $amount ? $amount : $loan;
             return array('status' => 'error', 'message' => "Maximum loan payment amount is $max");
         }
-        DB::transaction(function() use($id, $month, $year, $amount, $loanPayment){
-            $user = Auth::user();
-            $salary = new Salary();
-            $salary->month = $month;
-            $salary->year = $year;
-            $salary->amount = $amount;
-            $salary->user_id = $user->id;
-            $salary->beneficiary_id = $id;
-            $salary->save();
-            $loans = LoanGiven::where("beneficiary_id", "=", $id)->where("is_paid", "=", "N")->get();
-            $i = 0;
-            while($loanPayment > 0) {
-                $loan = $loans[$i];
-                $toPaymentBack = $loan->amount - $loan->paid;
-                $loanPaymentBack = new LoanPaymentBack();
-                $loanPaymentBack->loan_given_id = $loan->id;
-                $loanPayment->user_id = $user->id;
-                if($toPaymentBack > $loanPayment) {
-                    $loanPaymentBack->amount = $loan->paid + $loanPayment;
-                    $loan->paid = $loan->paid + $loanPayment;
-                    $loanPayment = 0;
+        try {
+            DB::transaction(function() use($id, $month, $year, $amount, $loanPayment){
+                $user = Auth::user();
+                $salary = new Salary();
+                $salary->month = $month;
+                $salary->year = $year;
+                $salary->amount = $amount;
+                $salary->user_id = $user->id;
+                $salary->beneficiary_id = $id;
+                $salary->save();
+                $loans = LoanGiven::where("beneficiary_id", "=", $id)->where("is_paid", "=", "N")->get();
+                $i = 0;
+                while($loanPayment > 0) {
+                    $loan = $loans[$i];
+                    $toPaymentBack = $loan->amount - $loan->paid;
+                    $loanPaymentBack = new LoanPaymentBack();
+                    $loanPaymentBack->loan_given_id = $loan->id;
+                    $loanPaymentBack->user_id = $user->id;
+                    if($toPaymentBack > $loanPayment) {
+                        $loanPaymentBack->amount = $loan->paid + $loanPayment;
+                        $loan->paid = $loan->paid + $loanPayment;
+                        $loanPayment = 0;
 
-                } else if($loanPayment > $toPaymentBack) {
-                    $loanPaymentBack->amount = $loan->paid + $toPaymentBack;
-                    $loan->paid = $loan->paid + $toPaymentBack;
-                    $loanPayment = $loanPayment - $toPaymentBack;
-                    $loan->is_piad = 'Y';
-                } else {
-                    $loanPaymentBack->amount = $loan->paid + $loanPayment;
-                    $loan->paid = $loan->paid + $loanPayment;
-                    $loan->is_piad = 'Y';
-                    $loanPayment = 0;
+                    } else if($loanPayment > $toPaymentBack) {
+                        $loanPaymentBack->amount = $loan->paid + $toPaymentBack;
+                        $loan->paid = $loan->paid + $toPaymentBack;
+                        $loanPayment = $loanPayment - $toPaymentBack;
+                        $loan->is_piad = 'Y';
+                    } else {
+                        $loanPaymentBack->amount = $loan->paid + $loanPayment;
+                        $loan->paid = $loan->paid + $loanPayment;
+                        $loan->is_paid = 'Y';
+                        $loanPayment = 0;
+                    }
+                    $loanPaymentBack->save();
+                    $loan->save();
+                    $i++;
                 }
-                $loanPaymentBack->save();
-                $loan->save();
-                $i++;
-            }
-        });
-
-        return array('status' => 'success', 'message' => "Salary has been successfully paid");
+            });
+            return array('status' => 'success', 'message' => "Salary has been successfully paid");
+        } catch(Exception $e) {
+            return array('status' => 'error', 'message' => "Salary payment has been failed");
+        }
     }
 } 
