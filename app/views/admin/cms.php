@@ -33,6 +33,7 @@
     <script src="js/App/tabs/beneficiary-tab.js"></script>
     <script src="js/App/tabs/salary-tab.js"></script>
     <script src="js/App/tabs/loan-tab.js"></script>
+    <script src="js/App/tabs/expense-tab.js"></script>
 
 </head>
 
