@@ -2,7 +2,7 @@
 
 class LoanController extends \BaseController {
     public function __construct() {
-
+        $this->beforeFilter("admin", array('only' => array("getLoadTable", "getCreate", "postSave")));
     }
 
     public function getLoadTable() {
@@ -11,11 +11,15 @@ class LoanController extends \BaseController {
         $array = array();
         $query = "";
         $text = "";
-        $isPaid = 'N';
-        $query = $query."is_paid = ?";
-        array_push($array, $isPaid);
+        $flag = false;
+        if(Input::get("is_paid")) {
+            $isPaid = Input::get("is_paid");
+            $query = $query."is_paid = ?";
+            array_push($array, $isPaid);
+        }
         if(Input::get("searchText")) {
-            $query = $query." and beneficiary_id = ?";
+            $query = $flag ? $query." and " : $query;
+            $query = $query."beneficiary_id = ?";
             $text = intval(Input::get("searchText")) ;
             array_push($array, $text);
         }
@@ -55,5 +59,43 @@ class LoanController extends \BaseController {
         $loan->paid = 0;
         $loan->save();
         return array("status" => "success", 'message' => "Loan has been given successfully");
+    }
+
+    public function getCreatePayment() {
+        $loanGivenId = (int) Input::get("id");
+        $loanGiven = LoanGiven::find($loanGivenId);
+        return View::make("loan.createPayment", array('loan' => $loanGiven));
+    }
+
+    public function postSavePayment() {
+        $loanGivenId = (int) Input::get("id");
+        $loanGiven = LoanGiven::find($loanGivenId);
+        $loanPayment = (double) Input::get("loan_payment");
+        if($loanGiven->amount <= $loanGiven->paid) {
+            return array("status" => "success", "message" => 'Loan already paid');
+        }
+        $toPaymentBack = $loanGiven->amount - $loanGiven->paid;
+        if($loanPayment > $toPaymentBack) {
+            return;
+        }
+        $user = Auth::user();
+        $loanPaymentBack = new LoanPaymentBack();
+        $loanPaymentBack->loan_given_id = $loanGiven->id;
+        $loanPaymentBack->user_id = $user->id;
+        $loanPaymentBack->amount = $loanGiven->paid + $toPaymentBack;
+        $loanGiven->paid = $loanGiven->paid + $loanPayment;
+        if($toPaymentBack == $loanPayment) {
+            $loanGiven->is_paid = 'Y';
+        }
+        $loanPaymentBack->save();
+        $loanGiven->save();
+        return array("status" => "success", "message" => 'Loan payment has been taken successfully');
+    }
+
+    public  function getPaymentHistory() {
+        $loanGivenId = (int) Input::get("id");
+        $loanGiven = LoanGiven::find($loanGivenId);
+        $payments = $loanGiven->payments;
+        return View::make("loan.paymentHistory", array('payments' => $payments));
     }
 }

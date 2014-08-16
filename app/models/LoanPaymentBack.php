@@ -13,7 +13,7 @@ class LoanPaymentBack extends Eloquent {
         return $this->belongsTo("LoanGiven", "load_given_id");
     }
 
-    public function collect_by() {
+    public function collectBy() {
         return $this->belongsTo("User", "user_id");
     }
 } 

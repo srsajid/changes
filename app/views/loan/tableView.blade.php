@@ -43,7 +43,12 @@
                 <td><?php echo $loan->paid; ?></td>
                 <td><?php echo $loan->created_at; ?></td>
                 <td>
-
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $loan->id; ?>" action="history" title="Payment history">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $loan->id; ?>" action="take-payment" title="Take payment">
+                        <span class="glyphicon glyphicon-upload"></span>
+                    </button>
                 </td>
             </tr>
         <?php }); ?>
