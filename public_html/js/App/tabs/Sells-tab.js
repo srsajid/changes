@@ -20,14 +20,26 @@ _s.afterTableLoad = function(event, ui) {
                 var packSelector = dom.find("select[name=packSelector]");
                 var searchText = dom.find("input[name=searchText]");
                 var searchArea = dom.find(".search-area")
+                function addSelectedClass(table) {
+                    table.find("tr").each(function() {
+                        var tr = $(this);
+                        var productId = tr.attr("product-id");
+                        if(sellsTable.find("tr[product-id="+ productId +"]").length) {
+                            tr.addClass("selected");
+                        }
+                    });
+                }
                 function loadSelectionTable(offset) {
+                    selectionTableContainer.loader();
                     util.ajax({
                         url: App.baseUrl + "sells/selection",
                         data: {package: packSelector.val(), searchText: searchText.val(), offset: offset},
                         success: function(resp) {
+                            selectionTableContainer.loader(false);
                             resp = $(resp)
                             selectionTableContainer.html(resp);
                             bindSelectionEvents(resp)
+                            addSelectedClass(resp)
                         }
                     })
                 }
@@ -56,6 +68,8 @@ _s.afterTableLoad = function(event, ui) {
                     sellsTable.find("tr.last-row").before(row);
                     updateGrandTotal();
                     row.find("span.remove").on("click", function() {
+                        var selectionTableRow = selectionTableContainer.find("table tr[product-id=" + data.id + "]")
+                        selectionTableRow.removeClass("selected");
                         row.remove();
                         updateGrandTotal();
                     })
@@ -94,6 +108,7 @@ _s.afterTableLoad = function(event, ui) {
                         }
                         else {
                             addRow(data);
+                            tr.addClass("selected");
                         }
                     })
 
