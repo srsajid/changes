@@ -16,7 +16,7 @@ class CreateExpenseTypeTable extends Migration {
             $table->increments("id");
             $table->string("name")->unique();
             $table->string("description")->nullable();
-            $table->string("status", 1);
+            $table->string("status", 10)->nullable();
             $table->timestamps();
         });
 	}

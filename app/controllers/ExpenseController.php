@@ -17,4 +17,25 @@ class ExpenseController extends BaseController {
     public function create() {
         return View::make("expense.create");
     }
+
+    public function save()
+    {
+        $rules = array(
+            'name' => 'required'
+        );
+        $inputs = Input::all();
+        $validator = Validator::make($inputs, $rules);
+        if($validator->fails()) {
+            return array('status' => 'error', 'message' => $validator->messages()->all());
+        }
+        $id = Input::get("id");
+        $name = Input::get("name");
+        $description = Input::get("description");
+        if(ExpenseService::saveExpenseType($id,$name,$description)){
+            return array('status' => 'success', 'message' => 'Expense type has been successfully saved');
+        }
+        else{
+            return array('status' => 'error', 'message' => 'Expense type not added');
+        }
+    }
 }

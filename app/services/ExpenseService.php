@@ -31,4 +31,21 @@ class ExpenseService {
         }
         return Expense_type::count();
     }
+
+    public static function saveExpenseType($id, $name, $description) {
+        DB::transaction(function() use ($id, $name, $description){
+            $expense = null;
+            if($id){
+                $expense = Expense_type::find($id);
+            }
+            else{
+                $expense = new Expense_type();
+            }
+            $expense->name = $name;
+            $expense->description = $description;
+            $expense->status = "Y";
+            $expense.save();
+        });
+        return true;
+    }
 }
