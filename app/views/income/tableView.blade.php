@@ -1,7 +1,7 @@
 <div class="head">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand">Expenses</a>
+            <a class="navbar-brand">Incomes</a>
         </div>
         <div>
             <div class="navbar-form navbar-right" role="search">
@@ -9,7 +9,7 @@
                     <input type="text" name="searchText" class="form-control" placeholder="Search" value="<?php echo($searchText); ?>">
                 </div>
                 <button type="submit" class="btn btn-default search">Submit</button>
-                <button type="button" class="btn btn-default btn-sm create-expense" title="New Expense Type">
+                <button type="button" class="btn btn-default btn-sm create-income" title="New Income Type">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                 </button>
             </div>
@@ -34,13 +34,13 @@
         </tr>
         </thead>
         <tbody>
-        <?php $expenses->each(function($expenses){ ?>
+        <?php $income->each(function($income){ ?>
             <tr class="active">
-                <td><?php echo $expenses->id; ?></td>
-                <td><?php echo $expenses->name; ?></td>
-                <td><?php echo $expenses->status; ?></td>
+                <td><?php echo $income->id; ?></td>
+                <td><?php echo $income->name; ?></td>
+                <td><?php echo $income->status; ?></td>
                 <td>
-                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $expenses->id; ?>" action="edit" title="Edit Expense Type">
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $income->id; ?>" action="edit" title="Edit Income Type">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                 </td>

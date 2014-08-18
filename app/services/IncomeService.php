@@ -1,6 +1,13 @@
 <?php
-class ExpenseService {
-    public static function getExpenses() {
+/**
+ * Created by PhpStorm.
+ * User: USER
+ * Date: 8/18/14
+ * Time: 10:22 PM
+ */
+
+class IncomeService {
+    public static function getIncomes() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
         $array = array();
@@ -10,13 +17,13 @@ class ExpenseService {
             $text = trim(Input::get("searchText")) ;
             array_push($array, "%".$text."%");
         }
-        $expenses = null;
+        $incomes = null;
         if(count($array) > 0 ) {
-            $expenses = Expense_type::whereRaw($query, $array)->take($max)->skip($offset);
+            $incomes = Income_type::whereRaw($query, $array)->take($max)->skip($offset);
         } else {
-            $expenses = Expense_type::take($max)->skip($offset)->orderBy('id', "ASC");
+            $incomes = Income_type::take($max)->skip($offset)->orderBy('id', "ASC");
         }
-        return $expenses->get();
+        return $incomes->get();
     }
     public static function getCounts() {
         $array = array();
@@ -27,24 +34,24 @@ class ExpenseService {
             array_push($array, "%".$text."%");
         }
         if(count($array) > 0 ) {
-            return Expense_type::whereRaw($query, $array)->count();
+            return Income_type::whereRaw($query, $array)->count();
         }
-        return Expense_type::count();
+        return Income_type::count();
     }
 
-    public static function saveExpenseType($id, $name, $description) {
+    public static function saveIncomeType($id, $name, $description) {
         DB::transaction(function() use ($id, $name, $description){
-            $expense = null;
+            $income = null;
             if($id){
-                $expense = Expense_type::find($id);
+                $income = Income_type::find($id);
             }
             else{
-                $expense = new Expense_type();
+                $income = new Income_type();
             }
-            $expense->name = $name;
-            $expense->description = $description;
-            $expense->status = "Y";
-            $expense->save();
+            $income->name = $name;
+            $income->description = $description;
+            $income->status = "Y";
+            $income->save();
         });
         return true;
     }

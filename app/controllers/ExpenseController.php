@@ -1,6 +1,11 @@
 <?php
-class ExpenseController extends BaseController {
-    public function loadTable() {
+class ExpenseController extends \BaseController {
+
+    public function __construct()
+    {
+        $this->beforeFilter('super_admin', array('except' => array("loadTable")));
+    }
+    public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
         $searchText = Input::get("searchText") ? Input::get("searchText") : "";
@@ -14,11 +19,19 @@ class ExpenseController extends BaseController {
             'searchText' => $searchText
         ));
     }
-    public function create() {
+    public function getCreate() {
         return View::make("expense.create");
     }
+    public function getEdit() {
+        $id = Input::get("id");
+        $expense = Expense_type::find($id);
+        $des = $expense->description;
+        return View::make("expense.edit", array(
+            'expense' => $expense,
+        ));
+    }
 
-    public function save()
+    public function postSave()
     {
         $rules = array(
             'name' => 'required'

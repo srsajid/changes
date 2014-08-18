@@ -1,8 +1,8 @@
-<form class="form-horizontal create-edit-form" role="form" action="{{OSMS::$baseUrl}}expense/save" method="post">
+<form class="form-horizontal create-edit-form" role="form" action="{{OSMS::$baseUrl}}income/save" method="post">
     <div class="form-group">
         <label class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-            <input type="text" name="name" class="form-control" placeholder="Expense Type Name"  value="">
+            <input type="text" name="name" class="form-control" placeholder="Income Type Name"  value="">
         </div>
     </div>
     <div class="form-group">
