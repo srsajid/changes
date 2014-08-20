@@ -12,13 +12,15 @@ class CreateTutionFeeEntryTable extends Migration {
 	 */
     public function up()
     {
-        /*Schema::create("tuition_fees", function(Blueprint $table) {
+        Schema::create("tuition_fees", function(Blueprint $table) {
             $table->increments("id");
-            $table->string("student_id")->unique();
-            $table->string("total")->nullable();
-            $table->string("status", 1);
+            $table->string("student_id");
+            $table->double("tuition");
+            $table->double("fine")->default(0);
+            $table->double("total");
+            $table->date("date");
             $table->timestamps();
-        });*/
+        });
     }
 
     /**
@@ -28,7 +30,7 @@ class CreateTutionFeeEntryTable extends Migration {
      */
     public function down()
     {
-        //Schema::drop("income_types");
+        Schema::drop("tuition_fees");
     }
 
 }
