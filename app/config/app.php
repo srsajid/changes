@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => 'joy bangla 1971',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
