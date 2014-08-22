@@ -25,7 +25,7 @@ class PayrollMenusSeed extends Migration {
                     'title' => "Salary",
                     'nav_menu' => 'payroll',
                     'ui_class' => 'icon-large icon-pie-chart',
-                    'tab_id' => 'beneficiary',
+                    'tab_id' => 'salary',
                     'min_weight' => 4
                 ),
                 array(
