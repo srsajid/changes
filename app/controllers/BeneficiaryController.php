@@ -103,7 +103,7 @@ class BeneficiaryController extends \BaseController {
         $month = (int) $inputs["month"];
         $year = (int) $inputs["year"];
         $amount = (float) $inputs["amount"];
-        $loanPayment = doubleval($inputs["loan_payment"]);
+        $loanPayment = doubleval(Input::get("loan_payment"));
         $beneficiary = Beneficiary::find($id);
         $paid = DB::table("salaries")->where("beneficiary_id", "=", $id)->where("month", "=", $month)->where("year", "=", $year)->sum("amount");
         $toPaid = $beneficiary->salary - $paid;
