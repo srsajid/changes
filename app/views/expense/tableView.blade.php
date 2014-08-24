@@ -43,6 +43,9 @@
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $expenses->id; ?>" action="edit" title="Edit Expense Type">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $expenses->id; ?>" action="add-expense" title="Add Expense">
+                        <span class="glyphicon glyphicon-usd"></span>
+                    </button>
                 </td>
             </tr>
         <?php }); ?>

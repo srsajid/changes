@@ -26,7 +26,7 @@ class ExpenseController extends \BaseController {
         $id = Input::get("id");
         $expense = Expense_type::find($id);
         $des = $expense->description;
-        return View::make("expense.edit", array(
+        return View::make("expense.add", array(
             'expense' => $expense,
         ));
     }
@@ -50,5 +50,9 @@ class ExpenseController extends \BaseController {
         else{
             return array('status' => 'error', 'message' => 'Expense type not added');
         }
+    }
+
+    public function getAddExpense(){
+        return View::make("expense.add");
     }
 }

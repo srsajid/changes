@@ -20,6 +20,7 @@ class OSMS {
         1 => "Chairman",
         2 => "Director",
         3 => "Teacher",
-        4 => "Staff"
+        4 => "Staff",
+        5 => "HR"
     );
 }

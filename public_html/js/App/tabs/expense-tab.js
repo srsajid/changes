@@ -20,6 +20,9 @@ _ex.onMenuOptionClick = function(action, data) {
         case "edit":
             _self.createEditExpense(data.id);
             break;
+        case "add-expense":
+            _self.addExpense(data.id);
+            break;
     }
 }
 
@@ -36,6 +39,18 @@ _ex.createEditExpense = function (id){
     }
     else{
         util.editPopup(title, App.baseUrl+ "expense/create", {
+            data: {id: id},
+            success: function() {
+                _self.reload();
+            }
+        });
+    }
+}
+_ex.addExpense = function (id){
+    var _self = this;
+    var title = "Add Expense";
+    if(id){
+        util.editPopup(title, App.baseUrl+ "expense/add-expense", {
             data: {id: id},
             success: function() {
                 _self.reload();
