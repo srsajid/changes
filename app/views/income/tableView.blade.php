@@ -12,6 +12,9 @@
                 <button type="button" class="btn btn-default btn-sm create-income" title="New Income Type">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                 </button>
+                <button type="button" class="btn btn-default btn-sm add-income" title="Income Entry">
+                    <span class="glyphicon glyphicon-usd"></span>
+                </button>
             </div>
         </div>
     </nav>

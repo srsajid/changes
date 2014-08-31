@@ -12,6 +12,9 @@ _income.afterTableLoad = function(event, ui) {
     panel.find(".create-income").on("click", function(){
         _self.createEditIncome();
     });
+    panel.find(".add-income").on("click", function(){
+        _self.addIncome();
+    });
 
 }
 
@@ -43,4 +46,14 @@ _income.createEditIncome = function (id){
             }
         });
     }
+}
+
+_income.addIncome = function (){
+    var _self = this;
+    var title = "Add Income";
+    util.editPopup(title, App.baseUrl+ "income/add", {
+        success: function() {
+            _self.reload();
+        }
+    });
 }
