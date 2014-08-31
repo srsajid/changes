@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="css/validation/validationEngine.jquery.css" type="text/css"/>
     <link rel="stylesheet" href="css/bootstrap.icon-large.min.css" type="text/css"/>
     <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="css/chosen.min.css" rel="stylesheet" media="screen">
     <link href="css/alertify/alertify.core.css" rel="stylesheet" media="screen">
     <link href="css/alertify/alertify.default.css" rel="stylesheet" media="screen">
     <link href="css/app/base-style.css" rel="stylesheet">
+
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/App/App.js"></script>
@@ -19,6 +21,7 @@
     <script src="js/App/utility/prototype.js"></script>
     <script src="js/validation/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/validation/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/chosen.jquery.min.js"></script>
     <script src="js/App/utility/form.js"></script>
     <script src="js/App/utility/srui-tabs.js"></script>
     <script src="js/App/utility/ui.js"></script>

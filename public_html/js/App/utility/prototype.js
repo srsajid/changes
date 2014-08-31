@@ -170,6 +170,7 @@ String.prototype.replaceAll = function(search, replace) {
 
     $.fn.updateUi = function() {
         this.find("input.date-picker").datepicker();
+        this.find("select.chosen").chosen();
     }
 
 }(jQuery))

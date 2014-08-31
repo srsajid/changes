@@ -1,7 +1,7 @@
 <div class="search">
     <div style="" class="navbar-form navbar-left">
         <div class="form-group">
-            {{ Form::select("packSelector", $packages) }}
+            {{ Form::select("packSelector", $packages, null, array("class" => 'chosen')) }}
         </div>
     </div>
     <div  class="navbar-form navbar-right search-area">
