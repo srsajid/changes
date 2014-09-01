@@ -7,13 +7,17 @@
  */
 
 class IncomeEntryController extends BaseController {
-    public function loadTable() {
+    public function __construct()
+    {
+        $this->beforeFilter('super_admin', array('except' => array("loadTable")));
+    }
+    public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
         $searchText = Input::get("searchText") ? Input::get("searchText") : "";
-        $income_list = IncomeService::getIncomes();
-        $total = IncomeService::getCounts();
-        return View::make("income.tableView", array(
+        $income_list = IncomeEntryService::getIncomes();
+        $total = IncomeEntryService::getCounts();
+        return View::make("incomeEntry.tableView", array(
             'income' => $income_list,
             'total' => $total,
             'max' => $max,
@@ -21,10 +25,10 @@ class IncomeEntryController extends BaseController {
             'searchText' => $searchText
         ));
     }
-    public function create() {
+    public function getCreate() {
         return View::make("income.create");
     }
-    public function edit() {
+    public function getEdit() {
         $id = Input::get("id");
         $income = Income_type::find($id);
         return View::make("income.edit", array(
@@ -32,7 +36,7 @@ class IncomeEntryController extends BaseController {
         ));
     }
 
-    public function save()
+    public function postSave()
     {
         $rules = array(
             'name' => 'required'

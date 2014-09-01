@@ -27,7 +27,6 @@ _incomeEnt.createIncomeEntry = function (){
     var _self = this;
     var title = "Create Income Entry";
     util.editPopup(title, App.baseUrl+ "incomeEntry/create", {
-        data: {id: id},
         success: function() {
             _self.reload();
         }
