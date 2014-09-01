@@ -38,4 +38,14 @@ class IncomeEntryService {
         }
         return IncomeEntry::count();
     }
+
+    public static function saveIncomeEntry($type, $amount) {
+        DB::transaction(function() use ($type, $amount){
+            $income = null;
+            $income = new IncomeEntry();
+            $income->amount = $amount;
+            $income->save();
+        });
+        return true;
+    }
 }

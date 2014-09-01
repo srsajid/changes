@@ -1,14 +1,13 @@
-<form class="form-horizontal create-edit-form" role="form" action="{{OSMS::$baseUrl}}income/save" method="post">
+<form class="form-horizontal create-edit-form" role="form" action="{{OSMS::$baseUrl}}incomeEntry/save" method="post">
     <div class="form-group">
-        <label class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-10">
-            <input type="text" name="name" class="form-control" placeholder="Income Type Name"  value="">
+        <div class="form-group col-sm-6">
+            {{ Form::select("incomeType", $incomeTypes, null, array("class" => 'chosen')) }}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">Description</label>
+        <label class="col-sm-2 control-label">amount</label>
         <div class="col-sm-10">
-            <textarea type="text" name="description" class="form-control"></textarea>
+            <input type="text" name="amount" class="form-control" placeholder="Amount"  value="">
         </div>
     </div>
     <div class="form-group">

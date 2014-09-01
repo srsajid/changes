@@ -38,6 +38,7 @@
     <script src="js/App/tabs/loan-tab.js"></script>
     <script src="js/App/tabs/expense-tab.js"></script>
     <script src="js/App/tabs/income-tab.js"></script>
+    <script src="js/App/tabs/incomeEntry-tab.js"></script>
 
 </head>
 

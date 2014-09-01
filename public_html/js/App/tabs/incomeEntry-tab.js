@@ -1,7 +1,7 @@
 /**
  * Created by User on 4/25/14.
  */
-var _incomeEnt = App.tabs.expense = new TableTab("income_entry", "Income Entry", App.baseUrl + "incomeEntry/load-table");
+var _incomeEnt = App.tabs.income_entry = new TableTab("income_entry", "Income Entry", App.baseUrl + "incomeEntry/load-table");
 _ex.beforeTableLoad = function(event, ui) {
 
 }

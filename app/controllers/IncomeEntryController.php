@@ -18,7 +18,7 @@ class IncomeEntryController extends BaseController {
         $income_list = IncomeEntryService::getIncomes();
         $total = IncomeEntryService::getCounts();
         return View::make("incomeEntry.tableView", array(
-            'income' => $income_list,
+            'incomeE' => $income_list,
             'total' => $total,
             'max' => $max,
             'offset' => $offset,
@@ -26,7 +26,12 @@ class IncomeEntryController extends BaseController {
         ));
     }
     public function getCreate() {
-        return View::make("income.create");
+        $incomeAll = Income_type::all();
+        $incomeTypes = array('' => "None");
+        foreach($incomeAll as $inc) {
+            $incomeTypes[$inc->id] = $inc->name;
+        }
+        return View::make("incomeEntry.create",array('incomeTypes' => $incomeTypes));
     }
     public function getEdit() {
         $id = Input::get("id");
@@ -39,16 +44,16 @@ class IncomeEntryController extends BaseController {
     public function postSave()
     {
         $rules = array(
-            'name' => 'required'
+            'incomeType' => 'required',
+            'amount' => 'required'
         );
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);
         if($validator->fails()) {
             return array('status' => 'error', 'message' => $validator->messages()->all());
         }
-        $id = Input::get("id");
-        $name = Input::get("name");
-        $description = Input::get("description");
+        $id = Input::get("incomeType");
+        $name = Input::get("amount");
         if(IncomeService::saveIncomeType($id,$name,$description)){
             return array('status' => 'success', 'message' => 'Income type has been successfully saved');
         }
