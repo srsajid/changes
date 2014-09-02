@@ -6,8 +6,8 @@
  * Time: 10:22 PM
  */
 
-class IncomeEntryService {
-    public static function getIncomes() {
+class ExpenseEntryService {
+    public static function getExpenses() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
         $array = array();
@@ -17,13 +17,13 @@ class IncomeEntryService {
             $text = trim(Input::get("searchText")) ;
             array_push($array, "%".$text."%");
         }
-        $incomes = null;
+        $expenses = null;
         if(count($array) > 0 ) {
-            $incomes = IncomeEntry::whereRaw($query, $array)->take($max)->skip($offset);
+            $expenses = ExpenseEntry::whereRaw($query, $array)->take($max)->skip($offset);
         } else {
-            $incomes = IncomeEntry::take($max)->skip($offset)->orderBy('id', "ASC");
+            $expenses = ExpenseEntry::take($max)->skip($offset)->orderBy('id', "ASC");
         }
-        return $incomes->get();
+        return $expenses->get();
     }
     public static function getCounts() {
         $array = array();
@@ -34,18 +34,18 @@ class IncomeEntryService {
             array_push($array, "%".$text."%");
         }
         if(count($array) > 0 ) {
-            return IncomeEntry::whereRaw($query, $array)->count();
+            return ExpenseEntry::whereRaw($query, $array)->count();
         }
-        return IncomeEntry::count();
+        return ExpenseEntry::count();
     }
 
-    public static function saveIncomeEntry( $type, $amount, $income_type ) {
-        DB::transaction(function() use ($type, $amount, $income_type){
-            $income = null;
-            $income = new IncomeEntry();
-            $income->income_type_id = $income_type;
-            $income->amount = $amount;
-            $income->save();
+    public static function saveExpenseEntry( $type, $amount, $expense_type ) {
+        DB::transaction(function() use ($type, $amount, $expense_type){
+            $expense = null;
+            $expense = new ExpenseEntry();
+            $expense->expense_type_id = $expense_type;
+            $expense->amount = $amount;
+            $expense->save();
         });
         return true;
     }

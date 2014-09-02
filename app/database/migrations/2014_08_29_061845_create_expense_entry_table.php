@@ -16,6 +16,7 @@ class CreateExpenseEntryTable extends Migration {
             $table->increments("id");
             $table->double("amount");
             $table->string("comment")->nullable();
+            $table->integer("expense_type_id")->unsigned();
             $table->foreign("expense_type_id")->references("id")->on("expense_types");
             $table->timestamps();
         });

@@ -1,7 +1,7 @@
 <div class="head">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand">Incomes Entries</a>
+            <a class="navbar-brand">Expense Entries</a>
         </div>
         <div>
             <div class="navbar-form navbar-right" role="search">
@@ -9,7 +9,7 @@
                     <input type="text" name="searchText" class="form-control" placeholder="Search" value="<?php echo($searchText); ?>">
                 </div>
                 <button type="submit" class="btn btn-default search">Submit</button>
-                <button type="button" class="btn btn-default btn-sm create-incomeE" title="New Income Entry">
+                <button type="button" class="btn btn-default btn-sm create-expenseE" title="New Expense Entry">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                 </button>
             </div>
@@ -34,11 +34,11 @@
         </tr>
         </thead>
         <tbody>
-        <?php $incomeE->each(function($incomeE){ ?>
+        <?php $expenseE->each(function($expenseE){ ?>
             <tr class="active">
-                <td><?php echo $incomeE->id; ?></td>
-                <td><?php echo $incomeE->incomeType->name ?></td>
-                <td><?php echo $incomeE->amount; ?></td>
+                <td><?php echo $expenseE->id; ?></td>
+                <td><?php echo $expenseE->expenseType->name ?></td>
+                <td><?php echo $expenseE->amount; ?></td>
             </tr>
         <?php }); ?>
         </tbody>

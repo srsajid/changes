@@ -53,8 +53,9 @@ class IncomeEntryController extends BaseController {
             return array('status' => 'error', 'message' => $validator->messages()->all());
         }
         $id = Input::get("incomeType");
-        $name = Input::get("amount");
-        if(IncomeService::saveIncomeType($id,$name,$description)){
+        $amount = Input::get("amount");
+        $income_type_id = Input::get("incomeType");
+        if(IncomeEntryService::saveIncomeEntry($id,$amount,$income_type_id)){
             return array('status' => 'success', 'message' => 'Income type has been successfully saved');
         }
         else{

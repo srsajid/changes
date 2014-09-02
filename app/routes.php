@@ -59,6 +59,7 @@ Route::controller('beneficiary', 'BeneficiaryController');
 Route::controller('salary', 'SalaryController');
 Route::controller('loan', 'LoanController');
 Route::controller('incomeEntry', 'IncomeEntryController');
+Route::controller('expenseEntry', 'ExpenseEntryController');
 
 Route::get("test", function(){
     $ym = DateTime::createFromFormat('m/d/Y h:i:s', '10/16/2003 00:00:00')->format("y-m-d h:i:s");

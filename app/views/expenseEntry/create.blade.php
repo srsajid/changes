@@ -1,8 +1,8 @@
-<form class="form-horizontal create-edit-form" role="form" action="{{OSMS::$baseUrl}}incomeEntry/save" method="post">
+<form class="form-horizontal create-edit-form" role="form" action="{{OSMS::$baseUrl}}expenseEntry/save" method="post">
     <div class="form-group">
-        <label class="col-sm-2 control-label">Income Type:</label>
+        <label class="col-sm-2 control-label">Expense Type:</label>
         <div class="form-group col-sm-10">
-            {{ Form::select("incomeType", $incomeTypes, null, array("class" => 'chosen form-control')) }}
+            {{ Form::select("expenseType", $expenseTypes, null, array("class" => 'chosen form-control')) }}
         </div>
     </div>
     <div class="form-group">
