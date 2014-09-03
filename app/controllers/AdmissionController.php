@@ -64,7 +64,10 @@ Class AdmissionController extends BaseController{
     {
         $rules = array(
             'student_ID' => 'required|AlphaNum|unique:students,sid',
-            'student_name' => 'required'
+            'student_name' => 'required',
+            'tuition' => 'required',
+            'clazz' => 'required',
+            'section' => 'required'
         );
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);
@@ -80,6 +83,7 @@ Class AdmissionController extends BaseController{
         $student_id = Input::get("student_ID");
         $name = Input::get("student_name");
         $father_name = Input::get("father_name");
+        $tuition = Input::get("tuition");
         $mother_name = Input::get("mother_name");
         $guardian_name = Input::get("guardian_name");
         $birth = DateTime::createFromFormat('d-m-Y',Input::get("date_birth"));
@@ -195,6 +199,7 @@ Class AdmissionController extends BaseController{
         $student->rid_class = Input::get("rsidclass");
         $student->rid_section = Input::get("rsidsection");
         $student->rid = $rsidn;
+        $student->tuition_fee = $tuition;
         $student->save();
         return array('status' => 'success', 'message' => 'Student has been saved successfully.');
     }

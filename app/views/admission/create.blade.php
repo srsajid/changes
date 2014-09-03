@@ -139,6 +139,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Tuition Fee</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="tuition" placeholder="Tuition Fee">
+        </div>
+    </div>
+    <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Readmission</label>
         <div class="col-sm-10">
             <select class="form-control" name="readmission">
