@@ -7,5 +7,9 @@
  */
 
 class TuitionFeeCount extends Eloqunt {
+    protected $table = "transport_fee_counts";
 
+    public function fees() {
+        return $this->hasMany("TuitionFee");
+    }
 } 

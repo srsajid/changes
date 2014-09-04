@@ -8,4 +8,15 @@
 
 class TuitionFee extends Eloqunt {
 
+    public function tuitionFeeCount() {
+        return $this->belongsTo("TuitionFeeCount", "tuition_fee_count_id");
+    }
+
+    public function collectedBy() {
+        return $this->belongsTo("User", "user_id");
+    }
+
+    public function student() {
+        return$this->belongsTo("Student");
+    }
 } 
