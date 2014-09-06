@@ -6,7 +6,7 @@
  * Time: 12:19 AM
  */
 
-class TuitionFee extends Eloqunt {
+class TuitionFee extends Eloquent {
 
     public function tuitionFeeCount() {
         return $this->belongsTo("TuitionFeeCount", "tuition_fee_count_id");
@@ -17,6 +17,10 @@ class TuitionFee extends Eloqunt {
     }
 
     public function student() {
-        return$this->belongsTo("Student");
+        return $this->belongsTo("Student");
+    }
+
+    public function getTotal() {
+        return $this->amount + $this->fine - $this->discount;
     }
 } 

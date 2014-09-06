@@ -40,6 +40,7 @@
     <script src="js/App/tabs/income-tab.js"></script>
     <script src="js/App/tabs/incomeEntry-tab.js"></script>
     <script src="js/App/tabs/expenseEntry-tab.js"></script>
+    <script src="js/App/tabs/tuition-fee-tab.js"></script>
 
 </head>
 

@@ -6,10 +6,14 @@
  * Time: 12:18 AM
  */
 
-class TuitionFeeCount extends Eloqunt {
-    protected $table = "transport_fee_counts";
+class TuitionFeeCount extends Eloquent {
+    protected $table = "tuition_fee_counts";
 
     public function fees() {
         return $this->hasMany("TuitionFee");
+    }
+
+    public function student() {
+        return$this->belongsTo("Student");
     }
 } 
