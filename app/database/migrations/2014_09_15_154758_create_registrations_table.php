@@ -29,6 +29,7 @@ class CreateRegistrationsTable extends Migration {
             $table->float("fee");
             $table->integer("student_id")->unsigned();
             $table->foreign("student_id")->references("id")->on("student_informations");
+            $table->unique(array("year", "student_id"));
         });
 	}
 
