@@ -118,6 +118,18 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Year</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="year" placeholder="Year">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Admission /Readmission fee</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="fee" placeholder="Admission/Readmission fee">
+        </div>
+    </div>
+    <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Recommended to Class</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" name="clazz" placeholder="Class">
