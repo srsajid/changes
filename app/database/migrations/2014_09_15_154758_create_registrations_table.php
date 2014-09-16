@@ -27,8 +27,10 @@ class CreateRegistrationsTable extends Migration {
             $table->string("relative_section")->nullable();
             $table->boolean("is_readmission");
             $table->float("fee");
+            $table->float("tuition_fee");
             $table->integer("student_id")->unsigned();
             $table->foreign("student_id")->references("id")->on("student_informations");
+            $table->unique(array("year", "student_id"));
         });
 	}
 
