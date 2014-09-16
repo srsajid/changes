@@ -2,7 +2,7 @@
 
 class TransportController extends \BaseController {
     public function __construct() {
-        $this->beforeFilter("admin");
+        $this->beforeFilter("admin_user");
     }
 
     public function getLoadTable() {

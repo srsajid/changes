@@ -39,9 +39,10 @@ Route::post("/product/updateInventory", "ProductController@updateInventory");
 Route::get("/product/selection", "ProductController@productForSelection");
 Route::get("/product/history", "ProductController@history");
 
-Route::get("/package/loadTable", "PackageController@loadTable");
-Route::get("/package/create", "PackageController@create");
-Route::post("/package/save", "PackageController@save");
+//Route::get("/package/loadTable", "PackageController@loadTable");
+//Route::get("/package/create", "PackageController@create");
+//Route::post("/package/save", "PackageController@save");
+Route::controller("package", "PackageController");
 
 /*Route::get("/expense/loadTable", "ExpenseController@loadTable");
 Route::get("/expense/create", "ExpenseController@create");

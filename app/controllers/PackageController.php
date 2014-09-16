@@ -8,7 +8,7 @@
 
 class PackageController extends BaseController{
 
-    public function loadTable() {
+    public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
         $searchText = Input::get("searchText") ? Input::get("searchText") : "";
@@ -23,7 +23,7 @@ class PackageController extends BaseController{
         ));
     }
 
-    public function create() {
+    public function getCreate() {
         $pack = null;
         if(Input::get("id")) {
             $pack = Package::find(intval(Input::get("id")));
@@ -33,7 +33,7 @@ class PackageController extends BaseController{
        return View::make("package.create", array('pack' => $pack));
     }
 
-    public function save() {
+    public function postSave() {
         $id = Input::get("id");
         $name = Input::get("name");
         $items = json_decode(Input::get("items"));
