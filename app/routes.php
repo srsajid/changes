@@ -55,6 +55,7 @@ Route::post("/income/save", "IncomeController@save");
 Route::get("/income/edit", "IncomeController@edit");
 
 Route::controller('user', 'UserController');
+Route::controller('registration', 'RegistrationController');
 Route::controller('expense', 'ExpenseController');
 Route::controller('beneficiary', 'BeneficiaryController');
 Route::controller('salary', 'SalaryController');
