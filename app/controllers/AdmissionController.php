@@ -1,3 +1,4 @@
+
 <?php
 Class AdmissionController extends BaseController{
     public function loadTable() {
