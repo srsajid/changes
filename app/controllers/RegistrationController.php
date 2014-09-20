@@ -41,4 +41,94 @@ class RegistrationController extends \BaseController {
             'searchText' => $text
         ));
     }
+
+    public function getCreate(){
+        $student = StudentInformation::all();
+        $students = array('' => "None");
+        foreach($student as $std) {
+            $students[$std->id] = $std->student_id;
+        }
+        return View::make("registration.create",array('students' => $students));
+    }
+
+    public function postSave(){
+        $rules = array(
+            'student_id' => 'required'
+        );
+        $inputs = Input::all();
+        $validator = Validator::make($inputs, $rules);
+        if($validator->fails()) {
+            return array('status' => 'error', 'message' => $validator->messages()->all());
+        }
+        $student_id = Input::get("student_id");
+        $transport = Input::get("transport");
+        $area = Input::get("area");
+        $year = Input::get("year");
+        $has_relative = Input::get("has_relative");
+        $has_transport = Input::get("has_relative");
+        $readmission = Input::get("readmission");
+        $fee = Input::get("fee");
+        $clazz = Input::get("clazz");
+        $section = Input::get("section");
+        $shift = Input::get("shift");
+        $tuition = Input::get("tuition");
+        $relative_student = Input::get("relative_student");
+        $relative_student_class = Input::get("relative_student_class");
+        $relative_student_section = Input::get("relative_student_section");
+        $transportfee = Input::get("transportfee");
+        $id = Input::get("id");
+
+
+        $registration = null;
+        $student = null;
+
+        if($student_id){
+            $student = StudentInformation::find($student_id);
+        }
+
+        if($id){
+            $registration = Registration::find($id);
+        }
+        else{
+            $registration = new Registration();
+        }
+        if($has_relative == "Yes"){
+            $registration->has_relative = 1;
+        }
+        else{
+            $registration->has_relative = 0;
+        }
+        if($has_transport == "Yes"){
+            $registration->has_transport = 1;
+        }
+        else{
+            $registration->has_transport = 0;
+        }
+        if($readmission == "Yes"){
+            $registration->is_readmission = 1;
+        }
+        else{
+            $registration->is_readmission = 0;
+        }
+        $registration->student_id = $student_id;
+        $registration->transport_fee = $transportfee;
+        $registration->clazz = $clazz;
+        $registration->section = $section;
+        $registration->shift = $shift;
+        $registration->relative_id = $relative_student;
+        $registration->relative_class = $relative_student_class;
+        $registration->relative_section = $relative_student_section;
+        $registration->is_readmission = $readmission;
+        $registration->fee = $fee;
+        $registration->tuition_fee = $tuition;
+        $registration->year = $year;
+        $registration->student_unique_id = $student->student_id;
+        $registration->save();
+        //if($registration->save()){
+            return array('status' => 'success', 'message' => 'Registration has been saved successfully.');
+        //}
+        //else{
+          //  return array('status' => 'error', 'message' => 'Registration Failed.');
+        //}
+    }
 }

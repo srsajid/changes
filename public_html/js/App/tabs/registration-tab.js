@@ -38,28 +38,18 @@ _r.onMenuOptionClick = function(action, data) {
     var _self = this;
     switch (action) {
         case "edit":
-            _self.editStudent(data.id);
-            break;
-        case "print":
-            _self.printStudent(data.id);
+            _self.editRegistration(data.id);
             break;
     }
 }
 
-_r.editStudent = function (id){
+_r.editRegistration = function (id){
     var _self = this;
-    util.editPopup("Edit Student", "admission/edit", {
+    util.editPopup("Edit Registration", "registration/edit", {
         width:925,
         success: function() {
             _self.reload();
         },
         data: {id: id}
     });
-}
-
-_r.printStudent = function (id){
-    var form = '<form action="' + App.baseUrl + 'sells/pdf" target="_blank">' +
-        '<input type="hidden" name="id" value="'+id+'">'+
-        '</form>'
-    $(form).submit();
 }

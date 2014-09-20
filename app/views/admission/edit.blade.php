@@ -29,7 +29,7 @@
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label" >Student ID</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" style="text-transform: uppercase" name="student_ID" placeholder="Student ID" value="<?php echo $student->sid;?>">
+            <input type="text" class="form-control" style="text-transform: uppercase" name="student_ID" placeholder="Student ID" value="<?php echo $student->student_id;?>">
         </div>
     </div>
     <div class="form-group">
@@ -99,60 +99,6 @@
         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
         <div class="col-sm-10">
             <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo $student->email;?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Transport</label>
-        <div class="col-sm-10">
-            <select class="form-control" name="transport" value="<?php echo $student->hasTransport;?>">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Recommended to Class</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="clazz" placeholder="Class" value="<?php echo $student->clazz;?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Section</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="section" placeholder="Class" value="<?php echo $student->section;?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Shift</label>
-        <div class="col-sm-10">
-            <select class="form-control" name="shift" value="<?php echo $student->shift;?>">
-                <option value="Morning">Morning</option>
-                <option value="Day">Day</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Relative SID</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="rsidn" placeholder="Relative SID" value="<?php echo $student->rid;?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Relative Student Class</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="rsidclass" placeholder="Relative Student Class" value="<?php echo $student->rid_class;?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Relative Student Section</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="rsidsection" placeholder="Relative Student Section" value="<?php echo $student->rid_section;?>">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Transport Fee</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="transportfee" placeholder="Transport Fee" value="<?php echo $student->name;?>">
         </div>
     </div>
     <div class="form-group">
