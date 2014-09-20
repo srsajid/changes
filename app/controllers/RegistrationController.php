@@ -6,7 +6,7 @@
  * Time: 1:40 PM
  */
 
-class RegistrationController extends \BaseController {
+class RegistrationController extends BaseController {
 
     public function __construct()
     {

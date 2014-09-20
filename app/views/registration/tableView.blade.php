@@ -42,8 +42,8 @@
         <?php $registration->each(function($reg){ ?>
             <tr class="active">
                 <td><?php echo $reg->id; ?></td>
-                <td><?php echo $reg->username; ?></td>
-                <td><?php echo $reg->StudentInformation->name; ?></td>
+                <td><?php echo $reg->name() ?></td>
+                <td><?php echo $reg->year; ?></td>
                 <td><?php echo $reg->clazz; ?></td>
                 <td><?php echo $reg->section; ?></td>
                 <td>
