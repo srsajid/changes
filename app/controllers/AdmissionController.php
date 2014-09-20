@@ -98,6 +98,8 @@ Class AdmissionController extends BaseController{
         $clazz = Input::get("clazz");
         $section = Input::get("section");
         $shift = Input::get("shift");
+        $year = Input::get("year");
+        $fee = Input::get("fee");
         $rsidn = Input::get("rsidn");
         $rsidclass = Input::get("rsidclass");
         $rsidsection = Input::get("rsidsection");
@@ -145,6 +147,8 @@ Class AdmissionController extends BaseController{
             $full_nameG = $temp_name. '.' .$extension;
             $upload_success = $guardian_img->move($path, $full_nameG);
         }
+        $registration = null;
+
         $student = null;
         if($id){
             $student = Student::find($id);
