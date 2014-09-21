@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStudentIdToRegistration extends Migration {
+class AddAreaToRegistration extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -14,7 +14,7 @@ class AddStudentIdToRegistration extends Migration {
 	{
         Schema::table('registrations', function(Blueprint $table)
         {
-            $table->string("student_unique_id");
+            $table->string("area")->nullable();
         });
 	}
 
@@ -27,7 +27,7 @@ class AddStudentIdToRegistration extends Migration {
 	{
         Schema::table('registrations', function(Blueprint $table)
         {
-            $table->dropColumn("student_unique_id");
+            $table->dropColumn("area");
         });
 	}
 

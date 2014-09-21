@@ -47,14 +47,11 @@
                 <td><?php echo $reg->clazz; ?></td>
                 <td><?php echo $reg->section; ?></td>
                 <td>
-                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $reg->id; ?>" action="edit" title="Edit User">
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $reg->id; ?>" action="edit" title="Edit Registration">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $reg->id; ?>" action="view" title="View User">
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $reg->id; ?>" action="view" title="View Registration">
                         <span class="glyphicon glyphicon-resize-full"></span>
-                    </button>
-                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $reg->id; ?>" action="inventory-update" title="Update Inventory">
-                        <span class="glyphicon glyphicon-upload"></span>
                     </button>
                 </td>
             </tr>

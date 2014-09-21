@@ -51,6 +51,24 @@ class RegistrationController extends BaseController {
         return View::make("registration.create",array('students' => $students));
     }
 
+    public function getEdit()
+    {
+        $id = Input::get("id");
+        $registration = null;
+        $student = null;
+        if($id){
+            $registration = Registration::find($id);
+            $student = StudentInformation::find($registration->student_id);
+        }
+        else{
+            $registration = new Registration();
+        }
+        return View::make("registration.edit", array(
+            'student' => $student,
+            'registration' => $registration
+        ));
+    }
+
     public function postSave(){
         $rules = array(
             'student_id' => 'required'
@@ -65,7 +83,7 @@ class RegistrationController extends BaseController {
         $area = Input::get("area");
         $year = Input::get("year");
         $has_relative = Input::get("has_relative");
-        $has_transport = Input::get("has_relative");
+        $has_transport = Input::get("has_transport");
         $readmission = Input::get("readmission");
         $fee = Input::get("fee");
         $clazz = Input::get("clazz");
@@ -83,7 +101,7 @@ class RegistrationController extends BaseController {
         $student = null;
 
         if($student_id){
-            $student = StudentInformation::find($student_id);
+            $student = StudentInformation::where('student_id' , '=', $student_id)->first();;
         }
 
         if($id){
@@ -110,25 +128,24 @@ class RegistrationController extends BaseController {
         else{
             $registration->is_readmission = 0;
         }
-        $registration->student_id = $student_id;
+        $registration->student_id = $student->id;
         $registration->transport_fee = $transportfee;
         $registration->clazz = $clazz;
         $registration->section = $section;
+        $registration->area = $area;
         $registration->shift = $shift;
         $registration->relative_id = $relative_student;
         $registration->relative_class = $relative_student_class;
         $registration->relative_section = $relative_student_section;
-        $registration->is_readmission = $readmission;
         $registration->fee = $fee;
         $registration->tuition_fee = $tuition;
         $registration->year = $year;
         $registration->student_unique_id = $student->student_id;
-        $registration->save();
-        //if($registration->save()){
+        if($registration->save()){
             return array('status' => 'success', 'message' => 'Registration has been saved successfully.');
-        //}
-        //else{
-          //  return array('status' => 'error', 'message' => 'Registration Failed.');
-        //}
+        }
+        else{
+            return array('status' => 'error', 'message' => 'Registration Failed.');
+        }
     }
 }

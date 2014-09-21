@@ -63,10 +63,29 @@ Class AdmissionController extends BaseController{
 
     public function save()
     {
-        $rules = array(
-            'student_ID' => 'required|AlphaNum|unique:student_informations,student_id',
-            'student_name' => 'required'
-        );
+        $id  = Input::get("id");
+        $rules = null;
+        if($id){
+            $rules = array(
+                'student_ID' => 'required|AlphaNum',
+                'student_name' => 'required'
+            );
+        }
+        else{
+            $rules = array(
+                'student_ID' => 'required|AlphaNum|unique:student_informations,student_id',
+                'student_name' => 'required'
+            );
+        }
+        $registration = null;
+
+        $student = null;
+        if($id){
+            $student = StudentInformation::find($id);
+        }
+        else{
+            $student = new StudentInformation();
+        }
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);
         if($validator->fails()) {
@@ -76,7 +95,6 @@ Class AdmissionController extends BaseController{
         $father_img = Input::file("father_image");
         $mother_img = Input::file("mother_image");
         $guardian_img = Input::file("guardian_image");
-        $id  = Input::get("id");
         $area = Input::get("area");
         $student_id = Input::get("student_ID");
         $name = Input::get("student_name");
@@ -100,6 +118,7 @@ Class AdmissionController extends BaseController{
         $full_nameS = null;
         $upload_success = null;
         if($student_img){
+            $student->student_img = $full_nameS;
             $filenameS = $student_img->getClientOriginalName();
             $temp_name = 'student';
             $extension =$student_img->getClientOriginalExtension();
@@ -109,6 +128,7 @@ Class AdmissionController extends BaseController{
         $filenameF = null;
         $full_nameF = null;
         if($father_img){
+            $student->father_img = $full_nameF;
             $filenameF = $father_img->getClientOriginalName();
             $temp_name = 'father';
             $extension =$father_img->getClientOriginalExtension();
@@ -118,6 +138,7 @@ Class AdmissionController extends BaseController{
         $filenameM = null;
         $full_nameM = null;
         if($mother_img){
+            $student->mother_img = $full_nameM;
             $filenameM = $mother_img->getClientOriginalName();
             $temp_name = 'mother';
             $extension =$mother_img->getClientOriginalExtension();
@@ -127,20 +148,12 @@ Class AdmissionController extends BaseController{
         $filenameG = null;
         $full_nameG = null;
         if($guardian_img){
+            $student->guardian_img = $full_nameG;
             $filenameG = $guardian_img->getClientOriginalName();
             $temp_name = 'guardian';
             $extension =$guardian_img->getClientOriginalExtension();
             $full_nameG = $temp_name. '.' .$extension;
             $upload_success = $guardian_img->move($path, $full_nameG);
-        }
-        $registration = null;
-
-        $student = null;
-        if($id){
-            $student = StudentInformation::find($id);
-        }
-        else{
-            $student = new StudentInformation();
         }
         $student->student_id = $student_id;
         $student->name = $name;
@@ -154,10 +167,6 @@ Class AdmissionController extends BaseController{
         $student->address = $address;
         $student->contact_number = $contact_number;
         $student->email = $email_address;
-        $student->student_img = $full_nameS;
-        $student->father_img = $full_nameF;
-        $student->mother_img = $full_nameM;
-        $student->guardian_img = $full_nameG;
         $student->save();
         return array('status' => 'success', 'message' => 'Student has been saved successfully.');
     }
