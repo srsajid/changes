@@ -147,7 +147,31 @@ class RegistrationController extends BaseController {
         $registration->tuition_fee = $tuition;
         $registration->year = $year;
         $registration->student_unique_id = $student->student_id;
-        if($registration->save()){
+        $success = true;
+        try {
+            DB::transaction(function() use ($registration, $id) {
+                $success = $registration->save();
+                if($id == null) {
+                    $tuitionCount = new TuitionFeeCount();
+                    $tuitionCount->year = $registration->year;
+                    $tuitionCount->month_count = 0;
+                    $tuitionCount->student_information_id = $registration->student_id;
+                    $success = $tuitionCount->save();
+                    $transportCount = new TransportFeeCount();
+                    $transportCount->year = $registration->year;
+                    $transportCount->month_count = 0;
+                    $transportCount->student_information_id = $registration->student_id;
+                    $success = $transportCount->save();
+                }
+                if(!$success) {
+                    throw Exception();
+                }
+
+            });
+        } catch(Exception $e) {
+            $success = false;
+        }
+        if($success){
             return array('status' => 'success', 'message' => 'Registration has been saved successfully.');
         }
         else{
