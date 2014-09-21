@@ -73,6 +73,31 @@ Route::filter('super_admin', function(){
         return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
     }
 });
+
+Route::filter('admission_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 4)) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
+Route::filter('sells_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 3)) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
+Route::filter('payroll_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 2)) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
+Route::filter('administration_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 1)) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
 Route::filter('admin', function(){
     if(!Auth::check() || Auth::user()->weight < 4) {
         return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
