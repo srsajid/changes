@@ -81,6 +81,11 @@
         <tbody>
         <?php $totals = 0.0; ?>
         <?php foreach($incomes as $income) { ?>
+
+            <?php
+            $total = $income->amount;
+            $totals = $totals + $total;
+            ?>
             <tr>
                 <td><?php echo $income->id;?></td>
                 <td><?php echo date("d/m/Y", strtotime($income->created_at)); ?></td>
