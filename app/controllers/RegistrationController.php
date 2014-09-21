@@ -71,7 +71,13 @@ class RegistrationController extends BaseController {
 
     public function postSave(){
         $rules = array(
-            'student_id' => 'required'
+            'student_id' => 'required',
+            'has_transport' => 'required',
+            'readmission' => 'required',
+            'fee' => 'required',
+            'clazz' => 'required',
+            'tuition' => 'required'
+
         );
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);

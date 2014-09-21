@@ -13,6 +13,7 @@ class CreateRegistrationsTable extends Migration {
 	public function up()
 	{
         Schema::create("registrations", function(Blueprint $table){
+            $table->engine = "InnoDB";
             $table->increments("id");
             $table->timestamps();
             $table->boolean("has_transport");

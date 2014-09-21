@@ -13,6 +13,7 @@ class CreateStudentInfo extends Migration {
 	public function up()
 	{
         Schema::create("student_informations", function(Blueprint $table){
+            $table->engine = "InnoDB";
             $table->increments("id");
             $table->string("name", 250);
             $table->string("student_id", 250);
