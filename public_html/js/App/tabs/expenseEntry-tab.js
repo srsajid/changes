@@ -12,6 +12,8 @@ _expenseEnt.afterTableLoad = function(event, ui) {
         _self.createExpenseEntry();
     });
 
+
+
 }
 
 _expenseEnt.onMenuOptionClick = function(action, data) {
