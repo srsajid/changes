@@ -14,7 +14,7 @@ class IncomeEntryService {
         $query = "";
         if(Input::get("searchText")) {
             $query = $query."name Like ?";
-            $text = trim(Input::get("searchText")) ;
+            $text = trim(Input::get("searchText"));
             array_push($array, "%".$text."%");
         }
         $incomes = null;
@@ -25,6 +25,20 @@ class IncomeEntryService {
         }
         return $incomes->get();
     }
+
+    public static function getIncomesWithFilter() {
+        $max = Input::get("max") ? intval(Input::get("max")): 10;
+        $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
+        $array = array();
+        $query = "";
+        $admission = Income_type::where('name','=','Admission Form')->get()->first();
+        $readmission = Income_type::where('name','=','Readmission Form')->get()->first();
+        $transfer = Income_type::where('name','=','Transfer certificate')->get()->first();
+        $incomes = null;
+        $incomes = IncomeEntry::where('income_type_id','=',$admission->id)->orWhere('income_type_id','=',$readmission->id)->orWhere('income_type_id','=',$transfer->id)->take($max)->skip($offset);
+        return $incomes->get();
+    }
+
     public static function getCounts() {
         $array = array();
         $query = "";

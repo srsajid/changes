@@ -34,7 +34,7 @@ class ExpenseController extends \BaseController {
     public function postSave()
     {
         $rules = array(
-            'name' => 'required'
+            'name' => 'required|unique:expense_types,name'
         );
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);
