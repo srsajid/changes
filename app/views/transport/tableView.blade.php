@@ -6,6 +6,7 @@
         <div>
             <div class="navbar-form navbar-right" role="search">
                 <div class="form-group">
+                    <input type="text" name="year" class="form-control advance-search-field" placeholder="Year" value="{{$year}}">
                     <input type="text" name="searchText" class="form-control" placeholder="Student Id" value="<?php echo($searchText); ?>">
                 </div>
                 <button type="submit" class="btn btn-default search">Search</button>
