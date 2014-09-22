@@ -42,8 +42,8 @@
         <tbody>
         <?php $fees->each(function($fee){ ?>
             <tr class="active">
-                <td><?php echo $fee->student->name; ?></td>
-                <td><?php echo $fee->student->sid; ?></td>
+                <td><?php echo $fee->studentInformation->name; ?></td>
+                <td><?php echo $fee->studentInformation->student_id; ?></td>
                 <td><?php echo $fee->number_of_month; ?></td>
                 <td><?php echo $fee->amount; ?></td>
                 <td><?php echo $fee->discount; ?></td>
