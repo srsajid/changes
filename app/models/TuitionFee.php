@@ -16,8 +16,8 @@ class TuitionFee extends Eloquent {
         return $this->belongsTo("User", "user_id");
     }
 
-    public function student() {
-        return $this->belongsTo("Student");
+    public function studentInformation() {
+        return $this->belongsTo("StudentInformation");
     }
 
     public function getTotal() {

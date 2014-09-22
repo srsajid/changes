@@ -12,9 +12,9 @@ class TuitionFeeController extends \BaseController {
         $query = "";
         $text = "";
         if(Input::get("searchText")) {
-            $query = $query."student_id = ?";
+            $query = $query."student_information_id = ?";
             $text = trim(Input::get("searchText")) ;
-            $student  = Student::where("sid", '=', $text)->get()->first();
+            $student  = StudentInformation::where("student_id", '=', $text)->get()->first();
             array_push($array, $student ? $student->id : 0);
         }
         $fees = null;
@@ -44,23 +44,20 @@ class TuitionFeeController extends \BaseController {
         $inputs = Input::all();
         $studentId = $inputs["studentId"];
         $year = (int) $inputs["year"];
-        $student = Student::where('sid', '=', $studentId)->get()->first();
-        if($student == null ) {
-            return array("status" => "error", 'message' => "Student not Found");
-        }
-        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where("student_id", "=", $student->id)->get()->first();
-        if($tuitionCount == null ) {
+        $registration = Registration::where('student_unique_id', '=', $studentId)->where("year", "=", $year)->get()->first();
+        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where("student_information_id", "=", $registration->student_id)->get()->first();
+        if($registration == null) {
             return array("status" => "error", 'message' => "Student is not admitted");
         }
-        $html = View::make("tuition.tuitionFeeNextStep", array("student" => $student, 'tuitionCount' => $tuitionCount));
+        $html = View::make("tuition.tuitionFeeNextStep", array("registration" => $registration, 'tuitionCount' => $tuitionCount));
         return array("status" => "success", "html" => $html->render());
     }
 
     public function postTakeTuition() {
         $sid = Input::get("studentId");
-        $student  = Student::where("sid", '=', $sid)->get()->first();
+        $student  = StudentInformation::where("student_id", '=', $sid)->get()->first();
         $year = (int) Input::get("year");
-        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where('student_id', '=', $student->id)->get()->first();
+        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where('student_information_id', '=', $student->id)->get()->first();
         $noOfMonth = (int) Input::get("monthCount");
         $amount = $student->tuition_fee * $noOfMonth;
         $discount = (double) Input::get("discount") ?: 0;
@@ -78,7 +75,7 @@ class TuitionFeeController extends \BaseController {
             $tuition->discount = $discount;
             $tuition->fine = $fine;
             $tuition->comment = Input::get("comment");
-            $tuition->student_id = $student->id;
+            $tuition->student_information_id = $student->id;
             $tuition->user_id = $user->id;
             $tuition->tuition_fee_count_id = $tuitionCount->id;
             $tuitionCount->save();
