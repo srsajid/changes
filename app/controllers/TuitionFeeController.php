@@ -51,28 +51,28 @@ class TuitionFeeController extends \BaseController {
         $studentId = $inputs["studentId"];
         $year = (int) $inputs["year"];
         $registration = Registration::where('student_unique_id', '=', $studentId)->where("year", "=", $year)->get()->first();
-        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where("student_information_id", "=", $registration->student_id)->get()->first();
         if($registration == null) {
             return array("status" => "error", 'message' => "Student is not admitted");
         }
+        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where("student_information_id", "=", $registration->student_id)->get()->first();
         $html = View::make("tuition.tuitionFeeNextStep", array("registration" => $registration, 'tuitionCount' => $tuitionCount));
         return array("status" => "success", "html" => $html->render());
     }
 
     public function postTakeTuition() {
         $sid = Input::get("studentId");
-        $student  = StudentInformation::where("student_id", '=', $sid)->get()->first();
         $year = (int) Input::get("year");
-        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where('student_information_id', '=', $student->id)->get()->first();
+        $registration = Registration::where('student_unique_id', '=', $sid)->where("year", "=", $year)->get()->first();
+        $tuitionCount = TuitionFeeCount::where('year', '=', $year)->where('student_information_id', '=', $registration->student_id)->get()->first();
         $noOfMonth = (int) Input::get("monthCount");
-        $amount = $student->tuition_fee * $noOfMonth;
+        $amount = $registration->tuition_fee * $noOfMonth;
         $discount = (double) Input::get("discount") ?: 0;
         $fine = (double) Input::get("fine") ?: 0;
         if($discount > $amount) {
             return array('status' => "error", 'message' => "Discount should not greater then or equal total amount");
         }
         if(($tuitionCount->month_count + $noOfMonth) > 12) return;
-        DB::transaction(function() use ($tuitionCount, $noOfMonth, $student, $amount, $discount, $fine) {
+        DB::transaction(function() use ($tuitionCount, $noOfMonth, $registration, $amount, $discount, $fine) {
             $user = Auth::user();
             $tuitionCount->month_count += $noOfMonth;
             $tuition = new TuitionFee();
@@ -81,7 +81,7 @@ class TuitionFeeController extends \BaseController {
             $tuition->discount = $discount;
             $tuition->fine = $fine;
             $tuition->comment = Input::get("comment");
-            $tuition->student_information_id = $student->id;
+            $tuition->student_information_id = $registration->student_id;
             $tuition->user_id = $user->id;
             $tuition->tuition_fee_count_id = $tuitionCount->id;
             $tuitionCount->save();
