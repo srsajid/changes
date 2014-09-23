@@ -55,34 +55,6 @@ class SeedMenus extends Migration {
                     'ui_class' => 'icon-large  icon-group',
                     'tab_id' => 'user',
                     'min_weight' => 5
-                ),
-                array(
-                    'title' => "Income Types",
-                    'nav_menu' => 'administrator',
-                    'ui_class' => 'glyphicon glyphicon-plus-sign',
-                    'tab_id' => 'income',
-                    'min_weight' => 5
-                ),
-                array(
-                    'title' => "Expense Types",
-                    'nav_menu' => 'administrator',
-                    'ui_class' => 'glyphicon glyphicon-minus-sign',
-                    'tab_id' => 'expense',
-                    'min_weight' => 5
-                ),
-                array(
-                    'title' => "Income Entry",
-                    'nav_menu' => 'administrator',
-                    'ui_class' => 'glyphicon glyphicon-import',
-                    'tab_id' => 'income_entry',
-                    'min_weight' => 5
-                ),
-                array(
-                    'title' => "Expense Entry",
-                    'nav_menu' => 'administrator',
-                    'ui_class' => 'glyphicon glyphicon-export',
-                    'tab_id' => 'expense_entry',
-                    'min_weight' => 5
                 )
             )
         );
