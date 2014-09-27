@@ -34,7 +34,7 @@ class IncomeController extends BaseController {
     public function save()
     {
         $rules = array(
-            'name' => 'required'
+            'name' => 'required|unique:income_types,name'
         );
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);

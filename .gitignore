@@ -1,8 +1,6 @@
 /.idea
 /bootstrap/compiled.php
 /vendor
-/app/OSMS.php
-/public_html/js/App/App.js
 *.iml
 composer.phar
 composer.lock

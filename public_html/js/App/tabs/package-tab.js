@@ -1,7 +1,7 @@
 /**
  * Created by User on 4/25/14.
  */
-var _pp = App.tabs.package = new TableTab("package", "Package Product", App.baseUrl + "package/loadTable");
+var _pp = App.tabs.package = new TableTab("package", "Package Product", App.baseUrl + "package/load-table");
 
 _pp.beforeTableLoad = function(event, ui) {
 }

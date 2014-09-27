@@ -12,6 +12,9 @@
                 <button type="button" class="btn btn-default btn-sm create-expenseE" title="New Expense Entry">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                 </button>
+                <button type="button" class="btn btn-default btn-sm tool-icon generate-report" title="Generate Report">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                </button>
             </div>
         </div>
     </nav>

@@ -11,7 +11,7 @@ class TransportFeeCount extends  Eloquent {
         return $this->hasMany("TransportFee");
     }
 
-    public function student() {
-        return $this->belongsTo("Student");
+    public function studentInformation() {
+        return $this->belongsTo("StudentInformation");
     }
 } 

@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application & Route Filters
@@ -10,19 +9,14 @@
 | application. Here you may also register your custom route filters.
 |
 */
-
 App::before(function($request)
 {
     date_default_timezone_set('Asia/Dhaka');
-
 });
-
-
 App::after(function($request, $response)
 {
-	//
+//
 });
-
 /*
 |--------------------------------------------------------------------------
 | Authentication Filters
@@ -33,22 +27,16 @@ App::after(function($request, $response)
 | integrates HTTP Basic authentication for quick, simple checking.
 |
 */
-
 Route::filter('auth', function()
 {
-	if (Auth::guest()) {
+    if (Auth::guest()) {
         return Redirect::guest('/');
     }
 });
-
-
-
-
 Route::filter('auth.basic', function()
 {
-	return Auth::basic();
+    return Auth::basic();
 });
-
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
@@ -59,12 +47,10 @@ Route::filter('auth.basic', function()
 | response will be issued if they are, which you may freely change.
 |
 */
-
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/admin');
+    if (Auth::check()) return Redirect::to('/admin');
 });
-
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter
@@ -75,17 +61,39 @@ Route::filter('guest', function()
 | session does not match the one given in this request, we'll bail.
 |
 */
-
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+    if (Session::token() != Input::get('_token'))
+    {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });
-
 Route::filter('super_admin', function(){
     if(!Auth::check() || Auth::user()->weight < 5) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
+Route::filter('admission_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 4)) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
+Route::filter('sells_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 3)) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
+Route::filter('payroll_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 2)) {
+        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+    }
+});
+
+Route::filter('administration_user', function(){
+    if(!Auth::check() || (Auth::user()->weight < 5 && Auth::user()->weight != 1)) {
         return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
     }
 });
@@ -95,7 +103,6 @@ Route::filter('admin', function(){
         return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
     }
 });
-
 Route::filter('normal', function(){
     if(!Auth::check() || Auth::user()->weight < 3) {
         return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);

@@ -42,6 +42,8 @@
     <script src="js/App/tabs/expenseEntry-tab.js"></script>
     <script src="js/App/tabs/tuition-fee-tab.js"></script>
     <script src="js/App/tabs/transport-fee-tab.js"></script>
+    <script src="js/App/tabs/registration-tab.js"></script>
+    <script src="js/App/tabs/others-tab.js"></script>
 
 </head>
 

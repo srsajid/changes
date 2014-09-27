@@ -55,4 +55,36 @@ class ExpenseEntryController extends BaseController {
             return array('status' => 'error', 'message' => 'Expense entry not added');
         }
     }
+    public function getDateselect() {
+        return View::make("expenseEntry.dateSelection");
+    }
+
+    public function postReport(){
+        $from = Input::get("from");
+        $to = Input::get("to");
+        $array = array();
+        $query= "";
+        $flag = false;
+        if($from) {
+            array_push($array, new DateTime($from."00:00:00"));
+            $query = $query."created_at >= ?";
+            $flag = true;
+        }
+        if($to) {
+            array_push($array, new DateTime($to."23:59:59"));
+            $query = $query.($flag ? " and " : "");
+            $query = $query."created_at <= ?";
+        }
+        if(strlen($query) <= 0) {
+            return "invalid query";
+        }
+        $expenses = ExpenseEntry::whereRaw($query, $array)->orderBy('created_at', 'ASC')->get();
+        /*$allIncome = (array) null;
+        foreach($incomes as $inc) {
+            $allIncome[$inc->name()] = $inc->amount;
+        }*/
+        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
+        $html =  View::make("expenseEntry.report", array('expenses' => $expenses, 'to' => $to, 'from' => $from));
+        return $html;
+    }
 }

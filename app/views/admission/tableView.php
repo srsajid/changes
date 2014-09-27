@@ -1,7 +1,7 @@
 <div class="head">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand">Admission</a>
+            <a class="navbar-brand">Students</a>
         </div>
         <div>
             <div class="navbar-form navbar-right" role="search">
@@ -33,9 +33,9 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>SID</th>
+            <th>Student ID</th>
             <th>Name</th>
-            <th>Class</th>
+            <th>Phone</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -43,9 +43,9 @@
         <?php $students->each(function($student){ ?>
             <tr class="active">
                 <td><?php echo $student->id; ?></td>
-                <td><?php echo $student->sid; ?></td>
+                <td><?php echo $student->student_id; ?></td>
                 <td><?php echo $student->name; ?></td>
-                <td><?php echo $student->clazz; ?></td>
+                <td><?php echo $student->contact_number; ?></td>
                 <td>
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $student->id; ?>" action="edit" title="Edit Student">
                         <span class="glyphicon glyphicon-pencil"></span>

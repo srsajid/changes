@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="col-sm-4 control-label">Per Month Tuition Fee:</label>
     <div class="col-sm-7">
-        <span class="form-control per-month-tuition">{{$student->tuition_fee}}</span>
+        <span class="form-control per-month-tuition">{{$registration->tuition_fee}}</span>
     </div>
 </div>
 

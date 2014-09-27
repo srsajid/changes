@@ -1,22 +1,22 @@
 <div class="form-group">
-    <label class="col-sm-4 control-label">Per Month Tuition Fee:</label>
+    <label class="col-sm-4 control-label">Per Month Transport Fee:</label>
     <div class="col-sm-7">
-        <span class="form-control per-month-tuition">{{$student->tuition_fee}}</span>
+        <span class="form-control per-month-transport">{{$registration->transport_fee}}</span>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-sm-4 control-label">Already Paid for:</label>
     <div class="col-sm-7">
-        <span class="form-control">{{$tuitionCount->month_count}} Month(s)</span>
+        <span class="form-control">{{$transportCount->month_count}} Month(s)</span>
     </div>
 </div>
 
-@if ($tuitionCount->month_count < 12)
+@if ($transportCount->month_count < 12)
     <div class="form-group">
         <label class="col-sm-4 control-label">No of Month:</label>
         <div class="col-sm-7">
-            {{ Form::selectYear('monthCount', 1, 12 - $tuitionCount->month_count, null, array('class' => 'form-control')) }}
+            {{ Form::selectYear('monthCount', 1, 12 - $transportCount->month_count, null, array('class' => 'form-control')) }}
         </div>
     </div>
     <div class="form-group">
@@ -34,7 +34,7 @@
     <div class="form-group">
         <label class="control-label col-sm-4">Total:</label>
         <div class="col-sm-7">
-            <span class="form-control total-tuition"></span>
+            <span class="form-control total-transport"></span>
         </div>
     </div>
     <div class="form-group">

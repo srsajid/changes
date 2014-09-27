@@ -6,15 +6,15 @@ class AdmissionService {
         $array = array();
         $query = "";
         if(Input::get("searchText")) {
-            $query = $query."clazz Like ?";
+            $query = $query."student_id Like ?";
             $text = trim(Input::get("searchText")) ;
             array_push($array, "%".$text."%");
         }
         $students = null;
         if(count($array) > 0 ) {
-            $students = Student::whereRaw($query, $array)->take($max)->skip($offset);
+            $students = StudentInformation::whereRaw($query, $array)->take($max)->skip($offset);
         } else {
-            $students = Student::take($max)->skip($offset)->orderBy('id', "ASC");
+            $students = StudentInformation::take($max)->skip($offset)->orderBy('id', "ASC");
         }
         return $students->get();
     }
@@ -23,13 +23,13 @@ class AdmissionService {
         $array = array();
         $query = "";
         if(Input::get("searchText")) {
-            $query = $query."name Like ?";
+            $query = $query."student_id Like ?";
             $text = trim(Input::get("searchText")) ;
             array_push($array, "%".$text."%");
         }
         if(count($array) > 0 ) {
-            return Student::whereRaw($query, $array)->count();
+            return StudentInformation::whereRaw($query, $array)->count();
         }
-        return Student::count();
+        return StudentInformation::count();
     }
 }

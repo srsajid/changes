@@ -2,20 +2,26 @@
 
 class TransportController extends \BaseController {
     public function __construct() {
-        $this->beforeFilter("admin");
+        $this->beforeFilter("administration_user");
     }
 
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
-        $array = array();
-        $query = "";
-        $text = "";
+        $array = array(); $query = ""; $text = ""; $year = "";
+        $flag = false;
         if(Input::get("searchText")) {
-            $query = $query."student_id = ?";
+            $query = $query."student_information_id = ?";
             $text = trim(Input::get("searchText")) ;
-            $student  = Student::where("sid", '=', $text)->get()->first();
+            $student  = StudentInformation::where("student_id", '=', $text)->get()->first();
             array_push($array, $student ? $student->id : 0);
+            $flag = true;
+        }
+        if(Input::get("year")) {
+            $year = (int) Input::get("year");
+            $query = $query.($flag ? " and " : "");
+            $query = $query."transport_fee_count_id IN (select id from `transport_fee_counts` where `year` = ?)";
+            array_push($array, $year);
         }
         $fees = null;
         $total = 0;
@@ -32,7 +38,8 @@ class TransportController extends \BaseController {
             'total' => $total,
             'max' => $max,
             'offset' => $offset,
-            'searchText' => $text
+            'searchText' => $text,
+            'year' => $year
         ));
     }
 
@@ -44,32 +51,32 @@ class TransportController extends \BaseController {
         $inputs = Input::all();
         $studentId = $inputs["studentId"];
         $year = (int) $inputs["year"];
-        $student = Student::where('sid', '=', $studentId)->get()->first();
-        if($student == null ) {
-            return array("status" => "error", 'message' => "Student not Found");
-        }
-        $transportCount = TransportFeeCount::where('year', '=', $year)->where("student_id", "=", $student->id)->get()->first();
-        if($transportCount == null ) {
+        $registration = Registration::where('student_unique_id', '=', $studentId)->where("year", "=", $year)->get()->first();
+        if( $registration== null ) {
             return array("status" => "error", 'message' => "Student is not admitted");
         }
-        $html = View::make("transport.transportFeeNextStep", array("student" => $student, 'transportCount' => $transportCount));
+        if(!$registration->has_transport) {
+            return array("status" => "error", 'message' => "Student do not use transport service");
+        }
+        $transportCount = TransportFeeCount::where('year', '=', $year)->where("student_information_id", "=", $registration->student_id)->get()->first();
+        $html = View::make("transport.transportFeeNextStep", array("registration" => $registration, 'transportCount' => $transportCount));
         return array("status" => "success", "html" => $html->render());
     }
 
     public function postTakeTransport() {
         $sid = Input::get("studentId");
-        $student  = Student::where("sid", '=', $sid)->get()->first();
         $year = (int) Input::get("year");
-        $transportCount = TransportFeeCount::where('year', '=', $year)->where('student_id', '=', $student->id)->get()->first();
+        $registration  = Registration::where("student_unique_id", '=', $sid)->where("year", "=", $year)->get()->first();
+        $transportCount = TransportFeeCount::where('year', '=', $year)->where('student_information_id', '=', $registration->student_id)->get()->first();
         $noOfMonth = (int) Input::get("monthCount");
-        $amount = $student->transport_fee * $noOfMonth;
+        $amount = $registration->transport_fee * $noOfMonth;
         $discount = (double) Input::get("discount") ?: 0;
         $fine = (double) Input::get("fine") ?: 0;
         if($discount > $amount) {
             return array('status' => "error", 'message' => "Discount should not greater then or equal total amount");
         }
         if(($transportCount->month_count + $noOfMonth) > 12) return;
-        DB::transaction(function() use ($transportCount, $noOfMonth, $student, $amount, $discount, $fine) {
+        DB::transaction(function() use ($transportCount, $noOfMonth, $registration, $amount, $discount, $fine) {
             $user = Auth::user();
             $transportCount->month_count += $noOfMonth;
             $transport = new TransportFee();
@@ -78,7 +85,7 @@ class TransportController extends \BaseController {
             $transport->discount = $discount;
             $transport->fine = $fine;
             $transport->comment = Input::get("comment");
-            $transport->student_id = $student->id;
+            $transport->student_information_id = $registration->student_id;
             $transport->user_id = $user->id;
             $transport->transport_fee_count_id = $transportCount->id;
             $transportCount->save();

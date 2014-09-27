@@ -39,9 +39,10 @@ Route::post("/product/updateInventory", "ProductController@updateInventory");
 Route::get("/product/selection", "ProductController@productForSelection");
 Route::get("/product/history", "ProductController@history");
 
-Route::get("/package/loadTable", "PackageController@loadTable");
-Route::get("/package/create", "PackageController@create");
-Route::post("/package/save", "PackageController@save");
+//Route::get("/package/loadTable", "PackageController@loadTable");
+//Route::get("/package/create", "PackageController@create");
+//Route::post("/package/save", "PackageController@save");
+Route::controller("package", "PackageController");
 
 /*Route::get("/expense/loadTable", "ExpenseController@loadTable");
 Route::get("/expense/create", "ExpenseController@create");
@@ -54,6 +55,7 @@ Route::post("/income/save", "IncomeController@save");
 Route::get("/income/edit", "IncomeController@edit");
 
 Route::controller('user', 'UserController');
+Route::controller('registration', 'RegistrationController');
 Route::controller('expense', 'ExpenseController');
 Route::controller('beneficiary', 'BeneficiaryController');
 Route::controller('salary', 'SalaryController');
@@ -62,6 +64,7 @@ Route::controller('incomeEntry', 'IncomeEntryController');
 Route::controller('expenseEntry', 'ExpenseEntryController');
 Route::controller('tuition', 'TuitionFeeController');
 Route::controller('transport', 'TransportController');
+Route::controller('others', 'OthersController');
 
 Route::get("test", function(){
     $ym = DateTime::createFromFormat('m/d/Y h:i:s', '10/16/2003 00:00:00')->format("y-m-d h:i:s");

@@ -12,6 +12,18 @@ _incomeEnt.afterTableLoad = function(event, ui) {
         _self.createIncomeEntry();
     });
 
+    panel.find(".generate-report").on("click", function(){
+        util.editPopup("Generate Report", App.baseUrl + "incomeEntry/dateselect", {
+            after_load: function() {
+                var $this = this;
+                this.updateUi();
+                this.find("form").on("submit", function(){
+                    $this.dialog("close");
+                })
+            }
+        });
+    });
+
 }
 
 _incomeEnt.onMenuOptionClick = function(action, data) {

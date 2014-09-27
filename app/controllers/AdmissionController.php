@@ -1,3 +1,4 @@
+
 <?php
 Class AdmissionController extends BaseController{
     public function loadTable() {
@@ -24,19 +25,19 @@ Class AdmissionController extends BaseController{
         $id = Input::get("id");
         $student = null;
         if($id){
-            $student = Student::find($id);
+            $student = StudentInformation::find($id);
         }
         else{
-            $student = new Student();
+            $student = new StudentInformation();
         }
         $absoulate_path = public_path();
         $student_img = null;
         $father_img = null;
         $mother_img = null;
         $guardian_img = null;
-        $path = $absoulate_path .'\\Photos\\'. $student->sid .'\\*.*';
+        $path = $absoulate_path .'\\Photos\\'. $student->student_id .'\\*.*';
         $files = glob($path);
-        $imagePath = OSMS::$baseUrl."/Photos/".$student->sid."/";
+        $imagePath = OSMS::$baseUrl."/Photos/".$student->student_id."/";
         foreach($files as $f){
             if(basename($f) == "father.jpg"){
                 $father_img = $imagePath.$student->father_img;
@@ -62,13 +63,29 @@ Class AdmissionController extends BaseController{
 
     public function save()
     {
-        $rules = array(
-            'student_ID' => 'required|AlphaNum|unique:students,sid',
-            'student_name' => 'required',
-            'tuition' => 'required',
-            'clazz' => 'required',
-            'section' => 'required'
-        );
+        $id  = Input::get("id");
+        $rules = null;
+        if($id){
+            $rules = array(
+                'student_ID' => 'required|AlphaNum',
+                'student_name' => 'required'
+            );
+        }
+        else{
+            $rules = array(
+                'student_ID' => 'required|AlphaNum|unique:student_informations,student_id',
+                'student_name' => 'required'
+            );
+        }
+        $registration = null;
+
+        $student = null;
+        if($id){
+            $student = StudentInformation::find($id);
+        }
+        else{
+            $student = new StudentInformation();
+        }
         $inputs = Input::all();
         $validator = Validator::make($inputs, $rules);
         if($validator->fails()) {
@@ -78,7 +95,6 @@ Class AdmissionController extends BaseController{
         $father_img = Input::file("father_image");
         $mother_img = Input::file("mother_image");
         $guardian_img = Input::file("guardian_image");
-        $id  = Input::get("id");
         $area = Input::get("area");
         $student_id = Input::get("student_ID");
         $name = Input::get("student_name");
@@ -93,15 +109,6 @@ Class AdmissionController extends BaseController{
         $address = Input::get("address");
         $contact_number = Input::get("contact_number");
         $email_address = Input::get("email");
-        $transport = Input::get("transport");
-        $clazz = Input::get("clazz");
-        $section = Input::get("section");
-        $shift = Input::get("shift");
-        $rsidn = Input::get("rsidn");
-        $rsidclass = Input::get("rsidclass");
-        $rsidsection = Input::get("rsidsection");
-        $transportfee = Input::get("transportfee");
-        $readm = Input::get("readmission");
 
         $absoulate_path = public_path();
         $path = $absoulate_path .'/Photos/'. $student_id .'/';
@@ -111,6 +118,7 @@ Class AdmissionController extends BaseController{
         $full_nameS = null;
         $upload_success = null;
         if($student_img){
+            $student->student_img = $full_nameS;
             $filenameS = $student_img->getClientOriginalName();
             $temp_name = 'student';
             $extension =$student_img->getClientOriginalExtension();
@@ -120,6 +128,7 @@ Class AdmissionController extends BaseController{
         $filenameF = null;
         $full_nameF = null;
         if($father_img){
+            $student->father_img = $full_nameF;
             $filenameF = $father_img->getClientOriginalName();
             $temp_name = 'father';
             $extension =$father_img->getClientOriginalExtension();
@@ -129,6 +138,7 @@ Class AdmissionController extends BaseController{
         $filenameM = null;
         $full_nameM = null;
         if($mother_img){
+            $student->mother_img = $full_nameM;
             $filenameM = $mother_img->getClientOriginalName();
             $temp_name = 'mother';
             $extension =$mother_img->getClientOriginalExtension();
@@ -138,32 +148,14 @@ Class AdmissionController extends BaseController{
         $filenameG = null;
         $full_nameG = null;
         if($guardian_img){
+            $student->guardian_img = $full_nameG;
             $filenameG = $guardian_img->getClientOriginalName();
             $temp_name = 'guardian';
             $extension =$guardian_img->getClientOriginalExtension();
             $full_nameG = $temp_name. '.' .$extension;
             $upload_success = $guardian_img->move($path, $full_nameG);
         }
-        $student = null;
-        if($id){
-            $student = Student::find($id);
-        }
-        else{
-            $student = new Student();
-            if($readm == 'Yes'){
-                $readmission = new ReAdmission();
-                $readmission->date_of_readmission = date("m/d/Y h:i:s a", time());
-                $readmission->sid = $student_id;
-                $readmission->save();
-            }
-            else{
-                $admission = new Admission();
-                $admission->date_of_admission = date("m/d/Y h:i:s a", time());
-                $admission->sid = $student_id;
-                $admission->save();
-            }
-        }
-        $student->sid = $student_id;
+        $student->student_id = $student_id;
         $student->name = $name;
         $student->father_name = $father_name;
         $student->mother_name = $mother_name;
@@ -175,31 +167,6 @@ Class AdmissionController extends BaseController{
         $student->address = $address;
         $student->contact_number = $contact_number;
         $student->email = $email_address;
-        $student->student_img = $full_nameS;
-        $student->father_img = $full_nameF;
-        $student->mother_img = $full_nameM;
-        $student->guardian_img = $full_nameG;
-        $student->area = $area;
-        if($transport == 'No'){
-            $student->hasTransport = false;
-        }
-        else{
-            $student->hasTransport = true;
-        }
-        $student->transport_cost = $transportfee;
-        $student->clazz = $clazz;
-        $student->shift = $shift;
-        $student->section = $section;
-        if($rsidn){
-            $student->has_rid = true;
-        }
-        else{
-            $student->has_rid = false;
-        }
-        $student->rid_class = Input::get("rsidclass");
-        $student->rid_section = Input::get("rsidsection");
-        $student->rid = $rsidn;
-        $student->tuition_fee = $tuition;
         $student->save();
         return array('status' => 'success', 'message' => 'Student has been saved successfully.');
     }

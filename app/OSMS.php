@@ -11,9 +11,10 @@ class OSMS {
 
     static $USER_TYPE = array(
         5 => "Super Admin",
-        4 => "Admin",
-        3 => 'Normal User',
-        0 => ""
+        4 => "Admission User",
+        3 => 'Sells User',
+        2 => "Payroll User",
+        1 => "Administration User"
      );
 
     static $BENEFICIARY_TYPE = array(

@@ -13,7 +13,7 @@ class TuitionFeeCount extends Eloquent {
         return $this->hasMany("TuitionFee");
     }
 
-    public function student() {
-        return$this->belongsTo("Student");
+    public function studentInformation() {
+        return$this->belongsTo("StudentInformation");
     }
 } 

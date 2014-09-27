@@ -11,7 +11,17 @@ _expenseEnt.afterTableLoad = function(event, ui) {
     panel.find(".create-expenseE").on("click", function(){
         _self.createExpenseEntry();
     });
-
+    panel.find(".generate-report").on("click", function(){
+        util.editPopup("Generate Report", App.baseUrl + "expenseEntry/dateselect", {
+            after_load: function() {
+                var $this = this;
+                this.updateUi();
+                this.find("form").on("submit", function(){
+                    $this.dialog("close");
+                })
+            }
+        });
+    });
 }
 
 _expenseEnt.onMenuOptionClick = function(action, data) {
