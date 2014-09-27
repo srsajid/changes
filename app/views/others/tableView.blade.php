@@ -30,13 +30,15 @@
         </tr>
         </thead>
         <tbody>
-        <?php $incomeE->each(function($incomeE){ ?>
-            <tr class="active">
-                <td><?php echo $incomeE->id; ?></td>
-                <td><?php echo $incomeE->incomeType->name ?></td>
-                <td><?php echo $incomeE->amount; ?></td>
-            </tr>
-        <?php }); ?>
+        @if($incomeE != null){
+            <?php $incomeE->each(function($incomeE){ ?>
+                <tr class="active">
+                    <td><?php echo $incomeE->id; ?></td>
+                    <td><?php echo $incomeE->incomeType->name ?></td>
+                    <td><?php echo $incomeE->amount; ?></td>
+                </tr>
+            <?php }); ?>
+        }
         </tbody>
     </table>
 </div>

@@ -35,7 +35,30 @@ class IncomeEntryService {
         $readmission = Income_type::where('name','=','Readmission Form')->get()->first();
         $transfer = Income_type::where('name','=','Transfer certificate')->get()->first();
         $incomes = null;
-        $incomes = IncomeEntry::where('income_type_id','=',$admission->id)->orWhere('income_type_id','=',$readmission->id)->orWhere('income_type_id','=',$transfer->id)->take($max)->skip($offset);
+        if($admission && $readmission && $transfer){
+            $incomes = IncomeEntry::where('income_type_id','=',$admission->id)->orWhere('income_type_id','=',$readmission->id)->orWhere('income_type_id','=',$transfer->id)->take($max)->skip($offset);
+        }
+        elseif($admission && $readmission && !$transfer){
+            $incomes = IncomeEntry::where('income_type_id','=',$admission->id)->orWhere('income_type_id','=',$readmission->id)->take($max)->skip($offset);
+        }
+        elseif($admission && !$readmission && $transfer){
+            $incomes = IncomeEntry::where('income_type_id','=',$admission->id)->orWhere('income_type_id','=',$transfer->id)->take($max)->skip($offset);
+        }
+        elseif($admission && !$readmission && !$transfer){
+            $incomes = IncomeEntry::where('income_type_id','=',$admission->id)->take($max)->skip($offset);
+        }
+        elseif(!$admission && $readmission && $transfer){
+            $incomes = IncomeEntry::where('income_type_id','=',$readmission->id)->orWhere('income_type_id','=',$transfer->id)->take($max)->skip($offset);
+        }
+        elseif(!$admission && $readmission && !$transfer){
+            $incomes = IncomeEntry::where('income_type_id','=',$readmission->id)->take($max)->skip($offset);
+        }
+        elseif(!$admission && !$readmission && $transfer){
+            $incomes = IncomeEntry::where('income_type_id','=',$transfer->id)->take($max)->skip($offset);
+        }
+        elseif(!$admission && !$readmission && !$transfer){
+            return $incomes;
+        }
         return $incomes->get();
     }
 
