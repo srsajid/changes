@@ -8,7 +8,7 @@ App.tabs.addToTab = function(tabId) {
         var url = tab.url;
         var panel = url ? url : "#sr-ui-tab-" + tabId;
         var headerTemplate = '<li tab-id="' + tabId + '"><a href="' + panel + '">' + tab.title +'</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>';
-        tabs.find(".main-tab-header-container ul").append(headerTemplate);
+        tabs.find(".main-tab-header-container ul.header-list").append(headerTemplate);
         if(!url) {
             tabs.find(".main-tab-body-container").append('<div id="'+ panel +'"></div>');
         }
