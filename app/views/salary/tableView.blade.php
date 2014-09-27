@@ -17,12 +17,14 @@
 <div class="body">
     <table class="table">
         <colgroup>
-            <col style="width: 20%"/>
+            <col style="width: 15%"/>
             <col style="width: 10%"/>
             <col style="width: 10%"/>
-            <col style="width: 20%"/>
-            <col style="width: 20%"/>
-            <col style="width: 20%"/>
+            <col style="width: 15%"/>
+            <col style="width: 15%"/>
+            <col style="width: 15%"/>
+            <col style="width: 10%"/>
+            <col style="width: 10%"/>
         </colgroup>
         <thead>
         <tr>
@@ -32,6 +34,8 @@
             <th>Amount</th>
             <th>GivenBy</th>
             <th>Date</th>
+            <th>Extra</th>
+            <th>Deduction</th>
         </tr>
         </thead>
         <tbody>
@@ -43,6 +47,8 @@
                 <td><?php echo $salary->amount; ?></td>
                 <td><?php echo $salary->givenBy->getFullName(); ?></td>
                 <td><?php echo $salary->created_at; ?></td>
+                <td><?php echo $salary->extra_payment; ?></td>
+                <td><?php echo $salary->deduction; ?></td>
             </tr>
         <?php }); ?>
         </tbody>

@@ -25,6 +25,10 @@ tableTabPrototype.beforeTabLoad = function(event, ui) {
             searchText: panel.find("input[name=searchText]").val()
         });
     }
+    panel.find(".advance-search-field").each(function() {
+        var field = $(this);
+        params[field.attr("name")] = field.val();
+    });
     if(typeof _self["beforeTableLoad"] == "function") {
         _self["beforeTableLoad"](event, ui, params);
     }

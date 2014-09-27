@@ -2,20 +2,26 @@
 
 class TransportController extends \BaseController {
     public function __construct() {
-        $this->beforeFilter("admin_user");
+        $this->beforeFilter("administration_user");
     }
 
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
-        $array = array();
-        $query = "";
-        $text = "";
+        $array = array(); $query = ""; $text = ""; $year = "";
+        $flag = false;
         if(Input::get("searchText")) {
             $query = $query."student_information_id = ?";
             $text = trim(Input::get("searchText")) ;
             $student  = StudentInformation::where("student_id", '=', $text)->get()->first();
             array_push($array, $student ? $student->id : 0);
+            $flag = true;
+        }
+        if(Input::get("year")) {
+            $year = (int) Input::get("year");
+            $query = $query.($flag ? " and " : "");
+            $query = $query."transport_fee_count_id IN (select id from `transport_fee_counts` where `year` = ?)";
+            array_push($array, $year);
         }
         $fees = null;
         $total = 0;
@@ -32,7 +38,8 @@ class TransportController extends \BaseController {
             'total' => $total,
             'max' => $max,
             'offset' => $offset,
-            'searchText' => $text
+            'searchText' => $text,
+            'year' => $year
         ));
     }
 

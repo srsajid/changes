@@ -103,7 +103,10 @@ class BeneficiaryController extends \BaseController {
         $month = (int) $inputs["month"];
         $year = (int) $inputs["year"];
         $amount = (float) $inputs["amount"];
+        $extra = (float) $inputs["extra"];
+        $deduction = (float) $inputs["deduction"];
         $loanPayment = doubleval(Input::get("loan_payment"));
+        $comment = $inputs["comment"];
         $beneficiary = Beneficiary::find($id);
         $paid = DB::table("salaries")->where("beneficiary_id", "=", $id)->where("month", "=", $month)->where("year", "=", $year)->sum("amount");
         $toPaid = $beneficiary->salary - $paid;
@@ -115,8 +118,11 @@ class BeneficiaryController extends \BaseController {
             $max = $loanPayment > $amount ? $amount : $loan;
             return array('status' => 'error', 'message' => "Maximum loan payment amount is $max");
         }
+        if($amount + $extra < $deduction + $loanPayment) {
+            return array('status' => 'error', 'message' => "Total deduction Should not greater then total Payment");
+        }
         try {
-            DB::transaction(function() use($id, $month, $year, $amount, $loanPayment){
+            DB::transaction(function() use($id, $month, $year, $amount, $loanPayment, $extra, $deduction, $comment){
                 $user = Auth::user();
                 $salary = new Salary();
                 $salary->month = $month;
@@ -124,6 +130,9 @@ class BeneficiaryController extends \BaseController {
                 $salary->amount = $amount;
                 $salary->user_id = $user->id;
                 $salary->beneficiary_id = $id;
+                $salary->extra_payment = $extra;
+                $salary->deduction = $deduction;
+                $salary->comment = $comment;
                 $salary->save();
                 $loans = LoanGiven::where("beneficiary_id", "=", $id)->where("is_paid", "=", "N")->get();
                 $i = 0;
