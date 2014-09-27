@@ -30,7 +30,7 @@
         </tr>
         </thead>
         <tbody>
-        @if($incomeE != null){
+        @if($incomeE != null)
             <?php $incomeE->each(function($incomeE){ ?>
                 <tr class="active">
                     <td><?php echo $incomeE->id; ?></td>
@@ -38,7 +38,7 @@
                     <td><?php echo $incomeE->amount; ?></td>
                 </tr>
             <?php }); ?>
-        }
+        @endif
         </tbody>
     </table>
 </div>

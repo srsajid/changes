@@ -18,13 +18,14 @@
     <table class="table">
         <colgroup>
             <col style="width: 15%"/>
-            <col style="width: 10%"/>
-            <col style="width: 10%"/>
+            <col style="width: 7%"/>
+            <col style="width: 8%"/>
             <col style="width: 15%"/>
             <col style="width: 15%"/>
             <col style="width: 15%"/>
             <col style="width: 10%"/>
             <col style="width: 10%"/>
+            <col style="width: 5%"/>
         </colgroup>
         <thead>
         <tr>
@@ -36,6 +37,7 @@
             <th>Date</th>
             <th>Extra</th>
             <th>Deduction</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -49,6 +51,11 @@
                 <td><?php echo $salary->created_at; ?></td>
                 <td><?php echo $salary->extra_payment; ?></td>
                 <td><?php echo $salary->deduction; ?></td>
+                <td>
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $salary->id; ?>" action="view" title="View">
+                        <span class="glyphicon glyphicon-camera"></span>
+                    </button>
+                </td>
             </tr>
         <?php }); ?>
         </tbody>

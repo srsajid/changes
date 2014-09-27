@@ -67,9 +67,5 @@ Route::controller('transport', 'TransportController');
 Route::controller('others', 'OthersController');
 
 Route::get("test", function(){
-    $ym = DateTime::createFromFormat('m/d/Y h:i:s', '10/16/2003 00:00:00')->format("y-m-d h:i:s");
-    $x = new DateTime("07/01/2014 00:00:00");
-    $y = new DateTime("07/01/2014 23:59:59");
-    $x = Sell::whereRaw("created_at >= ? and created_at <= ?", array($x, $y))->get();
-    return $x;
+   return DB::table("salaries")->select(DB::raw("beneficiaries.name as name, sum(salaries.amount) as amount"))->join("beneficiaries", "salaries.beneficiary_id", "=", "beneficiaries.id")->groupBy("salaries.beneficiary_id")->get();
 });
