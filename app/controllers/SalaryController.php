@@ -8,7 +8,7 @@
 
 class SalaryController extends BaseController {
     public function __construct() {
-        $this->beforeFilter('admin', array('only' => array("postPaySalary")));
+        $this->beforeFilter('payroll_user');
     }
 
     public function getLoadTable() {
@@ -41,4 +41,19 @@ class SalaryController extends BaseController {
         ));
     }
 
+    public function getReportForm() {
+        return View::make("salary.reportForm");
+    }
+
+    public function postReport() {
+        $year = Input::get("year");
+        $month = Input::get("month");
+        $salaries = DB::table("salaries")->select(DB::raw("beneficiaries.name as name, sum(salaries.amount) as amount, sum(salaries.extra_payment) as extra, sum(salaries.deduction) as deduction"))->join("beneficiaries", "salaries.beneficiary_id", "=", "beneficiaries.id")->where("salaries.year", "=", $year)->where("month", "=", $month)->groupBy("salaries.beneficiary_id")->get();
+        return View::make("salary.report", array("year" => $year, "month" =>  $month, "salaries" => $salaries));
+    }
+
+    public function getView() {
+        $salary = Salary::find(intval(Input::get("id")));
+        return View::make("salary.view", array("salary" => $salary));
+    }
 } 

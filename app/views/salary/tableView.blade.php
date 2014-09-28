@@ -3,14 +3,17 @@
         <div class="navbar-header">
             <a class="navbar-brand">Salary({{$total}})</a>
         </div>
-<!--        <div>-->
-<!--            <div class="navbar-form navbar-right" role="search">-->
+        <div>
+            <div class="navbar-form navbar-right" role="search">
 <!--                <div class="form-group">-->
 <!--                    <input type="text" name="searchText" class="form-control" placeholder="Search" value="--><?php //echo($searchText); ?><!--">-->
 <!--                </div>-->
 <!--                <button type="submit" class="btn btn-default search">Search</button>-->
-<!--            </div>-->
-<!--        </div>-->
+                <button type="button" class="btn btn-default btn-sm generate-report" title="Generate Report">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                </button>
+            </div>
+        </div>
     </nav>
 </div>
 
