@@ -1,0 +1,33 @@
+Income expense e onek unwanted button ase
+ai gula remove korte hobe ------------------------------------------------
+Encome type Tab e Add Income e "unexpected error dekhaitese"
+--------------------------------------------------------
+Income and Expense ertry listing e date lagbe
+ -------------------------------------
+income/expense Listing desc order e hobe
+ --------------------------------------
+income search korle erroer
+ --------------------------------
+ expense search korle o error
+ -----------------------------
+Sob form e colon lagbe and alignment thk kora lagbe
+ ---------------------------
+Expense type Table header missing
+---------------------------------
+expense type table add expense action e problem and form e date field keno
+------------------------------------------------------
+sob income /expense entry commnet filed thakle valo hoi
+-------------------------
+add income/expence illigal input nitese like "asdfasdfasdfasdf"
+-----------------------------------------
+Income By/Expence by field lagbe
+-------------------------------------
+income /expence edit korar time old value gula asetese na
+------------------------------------------
+Income date /Expence Date lagbe
+------------------------
+Income expense entry search error
+------------------------------------
+Income /expense /stuent /registration sob action appropiate filter lagbe
+-----------------------------------
+Income /expense /stuent /registration sob form e javascript validation lagbe

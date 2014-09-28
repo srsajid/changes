@@ -169,7 +169,9 @@ String.prototype.replaceAll = function(search, replace) {
     $('link[rel=stylesheet]').eq(0).before(cssHtml);
 
     $.fn.updateUi = function() {
-        this.find("input.date-picker").datepicker();
+        this.find("input.date-picker").each(function() {
+           $(this).datepicker();
+        });
         this.find("select.chosen").chosen();
     }
 

@@ -1,0 +1,22 @@
+Admission Table Tile and Ribon title change korte hobe 
+------------------------------
+Student Listing e Sells report button soraute hobe 
+-----------------------------
+Student form and registraion form e appropiate validation lagbe (javascript and sever side)
+---------------------------------
+Registration form e year drop down e hobe 
+----------------------------------------
+Registration form e class drop down e hoile valo hoi 
+-----------------------------------
+If transport yes transpot fee should be required (Major issue)
+-----------------------------------
+Regisration date lagbe 
+--------------------------------------
+Admission fee/class sshould be non ediitable(Major issue)
+--------------------------------
+Sob seach box e appropiate place holder lagbe (i.e student Id)
+----------------------------------------
+Other form size /label/title confusing
+-----------------------------------
+Registered by filed lagbe
+---------------------------
