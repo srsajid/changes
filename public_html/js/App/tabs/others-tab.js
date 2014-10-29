@@ -10,7 +10,7 @@ _other.afterTableLoad = function(event, ui) {
     var panel = ui.panel;
     panel.find(".create-others").on("click", function(){
         util.editPopup("Create Income", "others/create", {
-            width:925,
+            width:500,
             after_load: function() {
                 var popup = this;
                 function readURL(input) {

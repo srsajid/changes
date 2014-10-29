@@ -1,6 +1,6 @@
-Admission Table Tile and Ribon title change korte hobe 
+Done - Admission Table Tile and Ribon title change korte hobe
 ------------------------------
-Student Listing e Sells report button soraute hobe 
+Done - Student Listing e Sells report button soraute hobe
 -----------------------------
 Student form and registraion form e appropiate validation lagbe (javascript and sever side)
 ---------------------------------

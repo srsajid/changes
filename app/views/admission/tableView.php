@@ -1,7 +1,7 @@
 <div class="head">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand">Students</a>
+            <a class="navbar-brand">Admission</a>
         </div>
         <div>
             <div class="navbar-form navbar-right" role="search">
@@ -10,10 +10,6 @@
                 </div>
                 <button type="submit" class="btn btn-default search">Submit</button>
                 <button type="button" class="btn btn-default btn-sm create-admission" title="New Admission">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
-                </button>
-
-                <button type="button" class="btn btn-default btn-sm tool-icon create-report" title="Print Report">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                 </button>
             </div>
