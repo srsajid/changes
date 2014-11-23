@@ -43,7 +43,7 @@ class SeedMenus extends Migration {
                     'min_weight' => 4
                 ),
                 array(
-                    'title' => "Admission",
+                    'title' => "Student",
                     'nav_menu' => 'admission',
                     'ui_class' => 'glyphicon glyphicon-user',
                     'tab_id' => 'admission',

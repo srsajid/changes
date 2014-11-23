@@ -1,6 +1,7 @@
 
 <?php
-Class AdmissionController extends BaseController{
+Class AdmissionController extends BaseController {
+
     public function loadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
@@ -15,6 +16,7 @@ Class AdmissionController extends BaseController{
             'searchText' => $searchText
         ));
     }
+
     public function create()
     {
         return View::make("admission.create");
