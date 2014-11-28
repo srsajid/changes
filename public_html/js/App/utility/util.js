@@ -241,7 +241,8 @@ var util = {
                             if(typeof defaults.error == "function") {
                                 defaults['error'](resp);
                             }
-                        }
+                        },
+                        dataType: "json"
                     })
                 }
             })
