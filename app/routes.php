@@ -39,21 +39,12 @@ Route::post("/product/updateInventory", "ProductController@updateInventory");
 Route::get("/product/selection", "ProductController@productForSelection");
 Route::get("/product/history", "ProductController@history");
 
-//Route::get("/package/loadTable", "PackageController@loadTable");
-//Route::get("/package/create", "PackageController@create");
-//Route::post("/package/save", "PackageController@save");
-Route::controller("package", "PackageController");
-
-/*Route::get("/expense/loadTable", "ExpenseController@loadTable");
-Route::get("/expense/create", "ExpenseController@create");
-Route::post("/expense/save", "ExpenseController@save");
-Route::get("/expense/edit", "ExpenseController@edit");*/
-
 Route::get("/income/loadTable", "IncomeController@loadTable");
 Route::get("/income/create", "IncomeController@create");
 Route::post("/income/save", "IncomeController@save");
 Route::get("/income/edit", "IncomeController@edit");
 
+Route::controller("package", "PackageController");
 Route::controller('user', 'UserController');
 Route::controller('registration', 'RegistrationController');
 Route::controller('expense', 'ExpenseController');
@@ -68,4 +59,12 @@ Route::controller('others', 'OthersController');
 
 Route::get("test", function(){
 //   return DB::table("salaries")->select(DB::raw("beneficiaries.name as name, sum(salaries.amount) as amount"))->join("beneficiaries", "salaries.beneficiary_id", "=", "beneficiaries.id")->groupBy("salaries.beneficiary_id")->get();
+    $ps = Permission::all();
+    $p = $ps->first(function($key, $x) {
+        if($x->action == "getTa") {
+            return $x;
+        }
+    });
+    return Hash::make("admin");
+
 });

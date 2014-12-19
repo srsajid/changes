@@ -49,8 +49,8 @@
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $user->id; ?>" action="edit" title="Edit User">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $user->id; ?>" action="view" title="View User">
-                        <span class="glyphicon glyphicon-resize-full"></span>
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $user->id; ?>" action="manage-permission" title="View User">
+                        <span class="glyphicon glyphicon-lock"></span>
                     </button>
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $user->id; ?>" action="inventory-update" title="Update Inventory">
                         <span class="glyphicon glyphicon-upload"></span>

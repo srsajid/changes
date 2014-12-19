@@ -82,4 +82,45 @@ class UserController extends \BaseController {
         $user->save();
         return array('status' => 'success', 'message' => "User has been created successfully");
     }
+
+    public function getPermissionEdit() {
+        $controller = Input::get('controller');
+        $controller = $controller ?: "AdmissionController";
+        $user = User::find(Input::get('id'));
+        $actions = Config::get("permission.".$controller);
+        $permissions = Permission::where("user_id", "=", $user->id)->where("controller", "=", $controller)->get();
+        $permissionMappings = array();
+        $permissions->each(function($permission) use (&$permissionMappings) {
+            if($permission->is_allowed) {
+                $permissionMappings[$permission->action] = true;
+            }
+        });
+        return View::make("user.editPermission", array('permissionMappings' => $permissionMappings, 'actions' => $actions,'controller' => $controller, 'user' => $user));
+    }
+
+    public function postSavePermission() {
+        $inputs = Input::all();
+        $controller = $inputs["controller"];
+        $actionArr = Config::get("permission.".$controller);
+        $permissions = Permission::where("user_id", "=", $inputs["id"])->where("controller", "=", $controller)->get();
+        try {
+            DB::transaction(function() use ($permissions, $actionArr, $inputs, $controller) {
+                $id = $inputs["id"];
+                foreach($actionArr as $key => $value) {
+                    $permission = $permissions->first(function($k, $p) use ($key) {
+                        if($p->action == $key) {
+                            return $p;
+                        }
+                    });
+                    $permission = $permission ?: new Permission(array('controller' => $controller, 'user_id' => $id, 'action' => $key));
+                    $permission->is_allowed = array_key_exists($key, $inputs);
+                    $permission->save();
+                }
+            });
+        } catch(Exception $e) {
+            return array('status' => 'error', 'message' => 'Permission could not be saved');
+        }
+        return array('status'=> "success", 'message' => 'Permission have been saved successfully');
+
+    }
 }
