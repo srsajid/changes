@@ -1,9 +1,6 @@
 <?php
 
 class LoanController extends \BaseController {
-    public function __construct() {
-        $this->beforeFilter("admin", array('only' => array("getLoadTable", "getCreate", "postSave")));
-    }
 
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;

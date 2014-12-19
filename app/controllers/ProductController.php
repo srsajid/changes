@@ -7,6 +7,7 @@
  */
 
 class ProductController extends BaseController {
+
     public function loadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;

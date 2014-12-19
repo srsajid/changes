@@ -7,9 +7,6 @@
  */
 
 class SalaryController extends BaseController {
-    public function __construct() {
-        $this->beforeFilter('payroll_user');
-    }
 
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;

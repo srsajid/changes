@@ -7,10 +7,7 @@
  */
 
 class OthersController extends BaseController {
-    public function __construct()
-    {
-        $this->beforeFilter('admin_user', array('except' => array("loadTable")));
-    }
+
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
@@ -24,6 +21,7 @@ class OthersController extends BaseController {
             'offset' => $offset
         ));
     }
+
     public function getCreate() {
         $incomeAll = Income_type::all();
         $incomeTypes = array('' => "None");

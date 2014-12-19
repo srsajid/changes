@@ -7,6 +7,7 @@
  */
 
 class SellsController extends BaseController {
+
     public function loadTable() {
         $max = Input::has("max") ? Input::get("max") : "10";
         $offset = Input::has("offset") ? Input::get("offset") : "0";

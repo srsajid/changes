@@ -7,10 +7,7 @@
  */
 
 class IncomeEntryController extends BaseController {
-    public function __construct()
-    {
-        $this->beforeFilter('super_admin', array('except' => array("loadTable")));
-    }
+
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
@@ -25,6 +22,7 @@ class IncomeEntryController extends BaseController {
             'searchText' => $searchText
         ));
     }
+
     public function getCreate() {
         $incomeAll = Income_type::all();
         $incomeTypes = array('' => "None");
@@ -33,6 +31,7 @@ class IncomeEntryController extends BaseController {
         }
         return View::make("incomeEntry.create",array('incomeTypes' => $incomeTypes));
     }
+
     public function getEdit() {
         $id = Input::get("id");
         $income = Income_type::find($id);

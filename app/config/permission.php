@@ -6,7 +6,7 @@
             'UserController' => 'User'
         ),
         'AdmissionController' => array(
-            'getLoadTable' => "List Table",
+            'loadTable' => "List Table",
             'getCreate' => 'Create Form',
             'getEdit' => 'Edit Form',
             'postSave' => 'Save'
@@ -21,7 +21,7 @@
 
         ),
         'UserController' => array(
-            'getLoadTable' => 'User Table',
+            'getTableView' => 'User Table',
             'getCreate' => 'Create Edit Form',
             'postSave' => 'Save',
             'getPermissionEdit' => "Permission Edit Form",

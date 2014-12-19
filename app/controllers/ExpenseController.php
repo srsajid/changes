@@ -1,10 +1,6 @@
 <?php
 class ExpenseController extends \BaseController {
 
-    public function __construct()
-    {
-        $this->beforeFilter('super_admin', array('except' => array("loadTable")));
-    }
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
@@ -19,6 +15,7 @@ class ExpenseController extends \BaseController {
             'searchText' => $searchText
         ));
     }
+
     public function getCreate() {
         return View::make("expense.create");
     }

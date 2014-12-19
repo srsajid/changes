@@ -1,5 +1,6 @@
 <?php
 Class AccountController extends BaseController{
+
     public function login() {
         $user = array(
             'username' => Input::get('username'),

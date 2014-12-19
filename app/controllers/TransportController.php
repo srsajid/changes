@@ -1,9 +1,6 @@
 <?php
 
 class TransportController extends \BaseController {
-    public function __construct() {
-        $this->beforeFilter("administration_user");
-    }
 
     public function getLoadTable() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;

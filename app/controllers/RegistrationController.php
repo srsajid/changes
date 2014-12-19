@@ -8,10 +8,6 @@
 
 class RegistrationController extends BaseController {
 
-    public function __construct()
-    {
-        $this->beforeFilter('admin_user');
-    }
     public function getTableView() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;

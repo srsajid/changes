@@ -2,11 +2,6 @@
 
 class UserController extends \BaseController {
 
-    public function __construct()
-    {
-        $this->beforeFilter('super_admin', array('except' => array("getTableView")));
-    }
-
 	public function getTableView() {
         $max = Input::get("max") ? intval(Input::get("max")): 10;
         $offset = Input::get("offset") ? intval(Input::get("offset")) : 0;
