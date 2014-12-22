@@ -53,6 +53,7 @@ class ExpenseEntryController extends BaseController {
             return array('status' => 'error', 'message' => 'Expense entry not added');
         }
     }
+
     public function getDateselect() {
         return View::make("expenseEntry.dateSelection");
     }

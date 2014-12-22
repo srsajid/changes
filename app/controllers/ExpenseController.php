@@ -19,6 +19,7 @@ class ExpenseController extends \BaseController {
     public function getCreate() {
         return View::make("expense.create");
     }
+
     public function getEdit() {
         $id = Input::get("id");
         $expense = Expense_type::find($id);

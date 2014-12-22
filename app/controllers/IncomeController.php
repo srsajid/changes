@@ -21,9 +21,11 @@ class IncomeController extends BaseController {
             'searchText' => $searchText
         ));
     }
+
     public function create() {
         return View::make("income.create");
     }
+
     public function edit() {
         $id = Input::get("id");
         $income = Income_type::find($id);
@@ -52,4 +54,5 @@ class IncomeController extends BaseController {
             return array('status' => 'error', 'message' => 'Income type not added');
         }
     }
+
 }

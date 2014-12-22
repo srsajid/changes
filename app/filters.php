@@ -69,7 +69,7 @@ Route::filter('csrf', function()
 
 Route::filter('normal', function(){
     if(!Auth::check()) {
-        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+        return Response::json(array('status' => 'error', 'message' => 'You do not have appropriate permission'), 401);
     }
 });
 
@@ -82,6 +82,6 @@ Route::filter("permission", function() {
         $isAllowed = $permission ? $permission->is_allowed : false;
     }
     if(!$isAllowed) {
-        return Response::json(array('status' => 'error', 'message' => 'You do not have right permission'), 401);
+        return Response::json(array('status' => 'error', 'message' => 'You do not have appropriate permission'), 401);
     }
 });
