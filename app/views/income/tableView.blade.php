@@ -12,9 +12,6 @@
                 <button type="button" class="btn btn-default btn-sm create-income" title="New Income Type">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                 </button>
-                <button type="button" class="btn btn-default btn-sm add-income" title="Income Entry">
-                    <span class="glyphicon glyphicon-usd"></span>
-                </button>
             </div>
         </div>
     </nav>
@@ -45,12 +42,6 @@
                 <td>
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $income->id; ?>" action="edit" title="Edit Income Type">
                         <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $income->id; ?>" action="pay-salary" title="Add Income">
-                        <span class="glyphicon glyphicon-usd"></span>
-                    </button>
-                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $income->id; ?>" action="give-loan" title="Generate Report">
-                        <span class="glyphicon glyphicon-indent-left"></span>
                     </button>
                 </td>
             </tr>
