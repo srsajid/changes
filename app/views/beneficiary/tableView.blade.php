@@ -58,6 +58,9 @@
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $beneficiary->id; ?>" action="give-loan" title="Give Loan">
                         <span class="glyphicon glyphicon-indent-left"></span>
                     </button>
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $beneficiary->id; ?>" action="increment" title="Increment">
+                        <span class="glyphicon glyphicon-upload"></span>
+                    </button>
             </tr>
         <?php }); ?>
         </tbody>

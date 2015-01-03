@@ -22,7 +22,8 @@
             'postSave' => 'Save Beneficiary',
             'getPaySalaryForm' => 'Pay Salary Form 1',
             'getPaySalaryNextStep' => 'Pay Salary Form 2',
-            'postPaySalary' => "Pay Salary"
+            'postPaySalary' => "Pay Salary",
+            'getCreateIncrement' => 'Increment Form'
 
         ),
         'UserController' => array(

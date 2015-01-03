@@ -49,8 +49,8 @@ class BeneficiaryController extends \BaseController {
     }
 
     public function postSave() {
-        $beneficiary = null;
         $inputs = Input::all();
+        $beneficiary = null;
         if($inputs["id"]) {
             $beneficiary = Beneficiary::find(intval($inputs["id"]));
         } else {
@@ -60,19 +60,49 @@ class BeneficiaryController extends \BaseController {
             'phone' => 'required|unique:beneficiaries,phone'.($beneficiary->id ? ",$beneficiary->id" : ""),
             'email' => 'email'
         );
+        if(!$beneficiary->id) {
+            $rules['join_date'] = 'required';
+        }
         $validator = Validator::make($inputs, $rules);
         if($validator->fails()) {
             return array('status' => 'error', 'message' => $validator->messages()->all());
         }
-        $beneficiary->name = $inputs["name"];
-        $beneficiary->phone = $inputs["phone"];
-        $beneficiary->email = $inputs["email"];
-        $beneficiary->designation = $inputs["designation"];
-        $beneficiary->address = $inputs["address"];
-        $beneficiary->status = "A";
-        $beneficiary->type = intval($inputs["type"]);
-        $beneficiary->salary = floatval($inputs["salary"]);
-        $beneficiary->save();
+        DB::transaction(function() use ($beneficiary, $inputs){
+            $beneficiary->name = $inputs["name"];
+            $beneficiary->phone = $inputs["phone"];
+            $beneficiary->email = $inputs["email"];
+            $beneficiary->designation = $inputs["designation"];
+            $beneficiary->address_1 = $inputs["address_1"];
+            $beneficiary->address_2 = $inputs["address_2"];
+            $beneficiary->status = "A";
+            $beneficiary->sex = $inputs['sex'];
+            $beneficiary->campus = $inputs['campus'];
+            $beneficiary->type = intval($inputs["type"]);
+            $beneficiary->employee_id = intval($inputs["employee_id"]);
+            if(!$beneficiary->id) {
+                $date = date_create_from_format('m/d/Y', $inputs['join_date']);
+                $date = date_format($date, 'Y-m-d');
+                $beneficiary->salary = floatval($inputs["salary"]);
+                $beneficiary->join_date = $date;
+                $beneficiary->last_increment_date = $date;
+            }
+            $beneficiary->save();
+            $beneficiary->educations->each(function($education) {
+                $education->delete();
+            });
+            $degrees = json_decode($inputs["degrees"]);
+            $institutions = json_decode($inputs["institutions"]);
+            $grades = json_decode($inputs["grades"]);
+            $size = count($degrees);
+            for($i = 0; $i < $size; $i++ ) {
+                $education = new Education();
+                $education->degree = $degrees[$i];
+                $education->institution = $institutions[$i];
+                $education->grade = $grades[$i];
+                $education->beneficiary_id = $beneficiary->id;
+                $education->save();
+            }
+        });
         return array('status' => 'success', 'message' => "Beneficiary has been created successfully");
     }
 
@@ -163,5 +193,10 @@ class BeneficiaryController extends \BaseController {
         } catch(Exception $e) {
             return array('status' => 'error', 'message' => "Salary payment has been failed");
         }
+    }
+
+    public function getCreateIncrement() {
+        $id = Input::get("id");
+        return View::make("beneficiary.increment", array('id' => $id));
     }
 } 

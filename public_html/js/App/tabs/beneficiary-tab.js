@@ -23,16 +23,78 @@ _b.onMenuOptionClick = function(action, data) {
         case "give-loan":
             _self.giveLoan(data.id);
             break;
+        case "increment":
+            _self.increment(data.id);
+            break;
     }
 }
 
 _b.createEditBeneficiary = function (id){
     var _self = this;
     var title = id ? "Edit Beneficiary" : "Create Beneficiary";
+    var rowTemplate = '<tr class="education"><td class="degree">#DEGREE#</td>' +
+        '<td class="institution">#INSTITUTION#</td><td class="grade">#GRADE#</td>' +
+        '<td><span class="glyphicon glyphicon-pencil edit"><span class="glyphicon glyphicon-remove remove"></span></td>' +
+        '</tr>';
     util.editPopup(title, App.baseUrl+ "beneficiary/create", {
+        width: 800,
         data: {id: id},
         success: function() {
             _self.reload();
+        },
+        after_load: function() {
+            var popup = this, educationTable = popup.find("table"), lastRow = educationTable.find(".last-row"), editionRow;
+            var degree = lastRow.find('[name=degree]'), institution = lastRow.find('[name=institution]'),
+                grade = lastRow.find('[name=grade]');
+            lastRow.on("keydown", function(e) {
+                if(e.keyCode == 13) {
+                    lastRow.find(".add").trigger("click")
+                    return false
+                }
+            })
+            function attachRowEvent(row) {
+                row.find(".remove").on("click", function() {
+                    row.remove();
+                });
+                row.find(".edit").on("click", function() {
+                    degree.val(row.find(".degree").text());
+                    institution.val(row.find(".institution").text());
+                    grade.val(row.find(".grade").text());
+                    editionRow = row;
+                })
+            }
+            educationTable.find("tr:gt(0):not(.last-row)").each(function() {
+                attachRowEvent($(this));
+            });
+            lastRow.find('.add').on("click", function() {
+                if(degree.val() && institution.val()) {
+                    var row = $(rowTemplate.replace("#DEGREE#", degree.val()).replace("#INSTITUTION#", institution.val()).replace("#GRADE#", grade.val()));
+                    attachRowEvent(row)
+                    if(editionRow) {
+                        editionRow.replaceWith(row);
+                        editionRow = null
+                    } else {
+                        lastRow.before(row)
+                    }
+                    degree.val("");
+                    institution.val("")
+                    grade.val("");
+                }
+            })
+        },
+        preSubmit: function(ajaxSetting) {
+            var popup = this, educationTable = popup.find("table"), degrees = [], institutions = [], grades = [];
+            educationTable.find("tr:gt(0):not(.last-row)").each(function() {
+                var $this = $(this);
+                degrees.push($this.find(".degree").text());
+                institutions.push($this.find(".institution").text());
+                grades.push($this.find(".grades").text());
+            });
+            ajaxSetting.data = {
+                degrees: JSON.stringify(degrees),
+                institutions: JSON.stringify(institutions),
+                grades: JSON.stringify(grades)
+            };
         }
     });
 }
@@ -91,5 +153,10 @@ _b.paySalary = function (id){
 _b.giveLoan = function(id) {
     util.editPopup("Give Loan", App.baseUrl + "loan/create", {
         data: {beneficiaryId: id}
+    })
+};
+_b.increment = function(id) {
+    util.editPopup("Give Increment", App.baseUrl + "beneficiary/create-increment", {
+        data: {id: id}
     })
 }

@@ -183,6 +183,7 @@ var util = {
                 effect: "explode",
                 duration: 600
             },
+            position: ["top", 50],
             data: {}
         }
         defaults = $.extend(defaults, config)

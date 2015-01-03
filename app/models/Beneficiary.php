@@ -10,4 +10,8 @@ class Beneficiary extends Eloquent {
     public function salaries() {
         return $this->hasMany("Salary");
     }
+
+    public function educations() {
+        return $this->hasMany("Education");
+    }
 } 
