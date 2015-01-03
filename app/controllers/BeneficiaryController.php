@@ -199,4 +199,36 @@ class BeneficiaryController extends \BaseController {
         $id = Input::get("id");
         return View::make("beneficiary.increment", array('id' => $id));
     }
+
+    public function postSaveIncrement() {
+        $inputs = Input::all();
+        $rule = array(
+            'amount' => 'required|numeric',
+            'date' => 'required|date',
+            'type' => 'required'
+        );
+        $validation = Validator::make($inputs, $rule);
+        if($validation->fails()) {
+            return array('status' => 'error', 'message' => $validation->messages()->all());
+        }
+        $beneficiary = Beneficiary::find($inputs['id']);
+        $beneficiary->salary = $beneficiary->salary + floatval($inputs['amount']);
+        $date = date_create_from_format('m/d/Y', $inputs['date']);
+        $date = date_format($date, 'Y-m-d');
+        if($inputs['type'] == "Regular") {
+            $beneficiary->last_increment_date = $date;
+        }
+        $history = new SalaryHistory();
+        $history->adjust_amount = $inputs['amount'];
+        $history->type = $inputs['type'];
+        $history->date = $date;
+        $history->user_id = Auth::user()->id;
+        $history->comment = $inputs['comment'];
+        $history->beneficiary_id = $beneficiary->id;
+        DB::transaction(function() use ($beneficiary, $history){
+            $beneficiary->save();
+            $history->save();
+        });
+        return array('status' => 'success', 'message' => 'Salary has been adjust salary');
+    }
 } 

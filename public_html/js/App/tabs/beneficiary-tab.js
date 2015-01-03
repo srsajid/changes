@@ -156,7 +156,11 @@ _b.giveLoan = function(id) {
     })
 };
 _b.increment = function(id) {
-    util.editPopup("Give Increment", App.baseUrl + "beneficiary/create-increment", {
-        data: {id: id}
+    var _self = this;
+    util.editPopup("Adjust Salary", App.baseUrl + "beneficiary/create-increment", {
+        data: {id: id},
+        success: function() {
+            _self.reload();
+        }
     })
 }

@@ -7,6 +7,7 @@
  */
 
 class SalaryHistory extends Eloquent {
+    public $timestamps = false;
     protected $table = "salary_histories";
 
     public function beneficiary() {
