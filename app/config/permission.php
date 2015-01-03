@@ -8,7 +8,8 @@
             'ExpenseController' => 'Expense Types',
             'ExpenseEntryController' => 'Expense Entry',
             'IncomeController' => 'Income Types',
-            'IncomeEntryController' => 'Income Entry'
+            'IncomeEntryController' => 'Income Entry',
+            'NotificationController' => "Promotion Notification"
         ),
         'AdmissionController' => array(
             'loadTable' => "List Table",
@@ -72,5 +73,8 @@
             'getCreate' => 'Create New Income Entry',
             'getDateselect' => 'Choose Date for Report',
             'postReport' => 'Create Report'
+        ),
+        'NotificationController' => array(
+            'getLoadTable' => 'View Promotion Notification '
         )
     );

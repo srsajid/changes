@@ -57,6 +57,7 @@ Route::group(array('before' => 'permission'), function() {
     Route::controller('tuition', 'TuitionFeeController');
     Route::controller('transport', 'TransportController');
     Route::controller('others', 'OthersController');
+    Route::controller('notification', 'NotificationController');
 });
 
 Route::get("test", function(){

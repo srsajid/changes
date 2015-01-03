@@ -20,9 +20,9 @@ tableTabPrototype.beforeTabLoad = function(event, ui) {
             offset: pagination.attr("offset")
         })
     }
-    if(panel.find("input[name=searchText]").val()) {
+    if(panel.find("[name=searchText]").val()) {
         $.extend(params, {
-            searchText: panel.find("input[name=searchText]").val()
+            searchText: panel.find("[name=searchText]").val()
         });
     }
     panel.find(".advance-search-field").each(function() {

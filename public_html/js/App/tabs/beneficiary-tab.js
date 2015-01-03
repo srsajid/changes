@@ -173,3 +173,12 @@ _b.salaryHistory = function(id) {
         '</form>'
     $(form).submit();
 };
+var _no = App.tabs.notification = new TableTab("notification", "Promotion Notification", App.baseUrl + "notification/load-table");
+_no.afterTableLoad = function(event, ui) {
+    var _self = this;
+    var panel = ui.panel;
+    panel.find("[name=searchText]").on("change", function(){
+        _self.reload();
+    });
+
+}
