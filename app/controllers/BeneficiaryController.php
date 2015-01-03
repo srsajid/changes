@@ -231,4 +231,10 @@ class BeneficiaryController extends \BaseController {
         });
         return array('status' => 'success', 'message' => 'Salary has been adjust salary');
     }
+
+    public function getSalaryHistory() {
+        $id = (int) Input::get("id");
+        $beneficiary = Beneficiary::find($id);
+        return View::make("beneficiary.salaryHistory", array('beneficiary' => $beneficiary));
+    }
 } 

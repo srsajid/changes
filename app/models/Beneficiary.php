@@ -11,6 +11,10 @@ class Beneficiary extends Eloquent {
         return $this->hasMany("Salary");
     }
 
+    public function salaryHistories() {
+            return $this->hasMany("SalaryHistory");
+    }
+
     public function educations() {
         return $this->hasMany("Education");
     }

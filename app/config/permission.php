@@ -24,7 +24,8 @@
             'getPaySalaryNextStep' => 'Pay Salary Form 2',
             'postPaySalary' => "Pay Salary",
             'getCreateIncrement' => 'Salary Adjust Form',
-            'postSaveIncrement' => 'Adjust Salary'
+            'postSaveIncrement' => 'Adjust Salary',
+            'getSalaryHistory' => 'Show Salary History'
 
         ),
         'UserController' => array(

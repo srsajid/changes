@@ -61,6 +61,9 @@
                     <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $beneficiary->id; ?>" action="increment" title="Increment">
                         <span class="glyphicon glyphicon-upload"></span>
                     </button>
+                    <button type="button" class="btn btn-default btn-xs action-menu" data-id="<?php echo $beneficiary->id; ?>" action="salary-history" title="Salary History">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </button>
             </tr>
         <?php }); ?>
         </tbody>

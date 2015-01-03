@@ -14,7 +14,7 @@ class SalaryHistory extends Eloquent {
         return $this->belongsTo("Beneficiary");
     }
 
-    public function adjust_by() {
-        return $this->belongsTo("User");
+    public function user() {
+        return $this->belongsTo("User", "user_id");
     }
 }

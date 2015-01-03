@@ -26,6 +26,8 @@ _b.onMenuOptionClick = function(action, data) {
         case "increment":
             _self.increment(data.id);
             break;
+        case 'salary-history':
+            _self.salaryHistory(data.id)
     }
 }
 
@@ -163,4 +165,11 @@ _b.increment = function(id) {
             _self.reload();
         }
     })
-}
+};
+
+_b.salaryHistory = function(id) {
+    var form = '<form action="' + App.baseUrl + 'beneficiary/salary-history" target="_blank" method="get">' +
+        '<input type="hidden" name="id" value="'+id+'">'+
+        '</form>'
+    $(form).submit();
+};
