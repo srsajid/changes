@@ -9,7 +9,17 @@
             'ExpenseEntryController' => 'Expense Entry',
             'IncomeController' => 'Income Types',
             'IncomeEntryController' => 'Income Entry',
-            'NotificationController' => "Promotion Notification"
+            'NotificationController' => "Promotion Notification",
+            'LoanController' => "Loan",
+            'OthersController' => "Others",
+            "PackageController" => "Package Product",
+            "ProductController" => "Product",
+            "RegistrationController" => "Student Registration",
+            "SalaryController" => "Salary",
+            "SellsController" => "Sells",
+            "TransportController" => "Transport",
+            "TuitionFeeController" => "Tuition Fee",
+            "UserController" => "User"
         ),
         'AdmissionController' => array(
             'loadTable' => "List Table",
@@ -76,5 +86,63 @@
         ),
         'NotificationController' => array(
             'getLoadTable' => 'View Promotion Notification '
+        ),
+        "LoanController" => array(
+            'getLoadTable' => "View All Loan",
+            'getCreate' => "Give Loan",
+            'postSave' => "Loan Entry",
+            'getCreatePayment' => "Receive Payment Form",
+            'postSavePayment' => "Save Payment",
+            'getPaymentHistory' => "View Payment history"
+        ),
+        "PackageController" => array(
+            'getLoadTable' => "View All Packages",
+            'getCreate' => "Edit/Create Package",
+            'postSave' => "Save Package"
+        ),
+        "ProductController" => array(
+            'loadTable' => "View All Products",
+            'view' => "View Product",
+            'create' => "Create New Product Form",
+            'save' => "Save Product",
+            'loadInventoryForm' => "Inventory Update Form",
+            'updateInventory' => "Save Inventory Update",
+            'productForSelection' => "Product For Selection",
+            'history' => "Inventory Update History For a Product"
+        ),
+        "RegistrationController" => array(
+            'getTableView' => "View All Registration",
+            'getCreate' => "Registration Form",
+            'getEdit' => "Edit Registration Information",
+            'postSave' => "Save Registration"
+        ),
+        "SalaryController" => array(
+            'getTableView' => "View All Salary History",
+            'getReportForm' => "Report Form",
+            'postReport' => "Generate Report",
+            'getView' => "View Details"
+        ),
+        "SellsController" => array(
+            'loadTable' => "View All Sells",
+            'create' => "Sells Form",
+            'selection' => "Selection",
+            'save' => "Save a Sells",
+            'pdf' => "Generate PDF",
+            'view' => "View Sells Details",
+            'reportForm' => "Report Form",
+            'report' => "Generate Report"
+
+        ),
+        "TransportController" => array(
+            'getLoadTable' => "View All Transportation Income",
+            'getTransportFeeForm' => "Transport Fee Entry Form",
+            'getTransportFeeNext' => "getTransportFeeNext",
+            'postTakeTransport' => "Save Transport Fee Entry"
+        ),
+        "TuitionFeeController" => array(
+            'getLoadTable' => "View All Tuition Fee Entry",
+            'getTuitionFeeForm' => "Tuition Fee Entry Form",
+            'getTuitionFeeNext' => "getTuitionFeeNext",
+            'postTakeTuition' => "Save Tuition Fee Entry"
         )
     );

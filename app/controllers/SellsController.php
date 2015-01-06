@@ -85,7 +85,7 @@ class SellsController extends BaseController {
     public function view() {
         $sell = Sell::find(intval(Input::get('id')));
         if(!$sell) {
-            return "Sells no found";
+            return "Sells not found";
         }
         return View::make("sells.view", array('sell' => $sell));
 

@@ -118,4 +118,5 @@ class UserController extends \BaseController {
         return array('status'=> "success", 'message' => 'Permission have been saved successfully');
 
     }
+
 }
