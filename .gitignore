@@ -1,6 +1,6 @@
 /.idea
-/bootstrap/compiled.php
-/vendor
+/laravel/bootstrap/compiled.php
+/laravel/vendor
 *.iml
 composer.phar
 composer.lock

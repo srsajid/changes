@@ -78,9 +78,10 @@ class IncomeEntryService {
 
     public static function saveIncomeEntry( $type, $amount, $income_type ) {
         DB::transaction(function() use ($type, $amount, $income_type){
-            $income = null;
+            $user = Auth::user();
             $income = new IncomeEntry();
             $income->income_type_id = $income_type;
+            $income->user_id = $user->id;
             $income->amount = $amount;
             $income->save();
         });

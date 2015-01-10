@@ -41,10 +41,12 @@ class ExpenseEntryService {
 
     public static function saveExpenseEntry( $type, $amount, $expense_type ) {
         DB::transaction(function() use ($type, $amount, $expense_type){
+            $user = Auth::user();
             $expense = null;
             $expense = new ExpenseEntry();
             $expense->expense_type_id = $expense_type;
             $expense->amount = $amount;
+            $expense->user_id = $user->id;
             $expense->save();
         });
         return true;
