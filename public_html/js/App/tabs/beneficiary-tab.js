@@ -82,6 +82,20 @@ _b.createEditBeneficiary = function (id){
                     institution.val("")
                     grade.val("");
                 }
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('.' + $(input).attr("name")).attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            popup.find("[type=file]").srFileInput();
+            popup.find("[type=file]").on("change", function() {
+                readURL(this);
             })
         },
         preSubmit: function(ajaxSetting) {

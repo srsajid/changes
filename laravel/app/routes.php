@@ -60,6 +60,12 @@ Route::group(array('before' => 'permission'), function() {
     Route::controller('notification', 'NotificationController');
 });
 
+Route::any("images/employee/{id}/{name}", function($id, $name) {
+    $response = Response::make(File::get(storage_path()."/images/employee/$id/$name"));
+    $response->header('Content-Type', 'image/png');
+    return $response;
+})->before("normal");
+
 Route::get("test", function(){
 //   return DB::table("salaries")->select(DB::raw("beneficiaries.name as name, sum(salaries.amount) as amount"))->join("beneficiaries", "salaries.beneficiary_id", "=", "beneficiaries.id")->groupBy("salaries.beneficiary_id")->get();
     $ps = Permission::all();

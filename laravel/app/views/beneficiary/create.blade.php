@@ -1,5 +1,11 @@
-<form class="form-horizontal create-edit-form" action="{{OSMS::$baseUrl}}beneficiary/save" method="post">
+<form class="form-horizontal create-edit-form beneficiary-form" action="{{OSMS::$baseUrl}}beneficiary/save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{{$beneficiary->id}}">
+    <div class="form-group">
+        <div class="col-sm-offset-8 col-sm-4">
+            <img src="{{$beneficiary->image ? OSMS::$baseUrl."images/employee/$beneficiary->id/$beneficiary->image" : ""}}" class="image thumbnail" alt="Image">
+            <input type="file" name="image" title="Choose Image">
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Name:</label>
         <div class="col-sm-10">
@@ -15,13 +21,19 @@
      <div class="form-group">
         <label class="col-sm-2 control-label">Present Address:</label>
         <div class="col-sm-10">
-            <input class="form-control validate[required]" name="address_1" value="{{$beneficiary->address_1}}">
+            <input class="form-control" name="address_1" value="{{$beneficiary->address_1}}">
         </div>
      </div>
      <div class="form-group">
          <label class="col-sm-2 control-label">Permanent Address:</label>
          <div class="col-sm-10">
-             <input class="form-control validate[required]" name="address_2" value="{{$beneficiary->address_2}}">
+             <input class="form-control" name="address_2" value="{{$beneficiary->address_2}}">
+         </div>
+    </div>  
+    <div class="form-group">
+         <label class="col-sm-2 control-label">Bank Ac No:</label>
+         <div class="col-sm-10">
+             <input class="form-control" name="bank_account" value="{{$beneficiary->bank_account}}">
          </div>
     </div>
     <div class="form-group">

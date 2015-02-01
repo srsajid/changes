@@ -76,7 +76,7 @@
 .edit-popup-container {
     min-height: 100px;
 }
-.create-edit-form {
+.create-edit-form:not(.beneficiary-form) {
     margin-top: 30px;
 }
 .create-edit-form .formError{
@@ -150,7 +150,7 @@ td.editable.editing .edit {
 .sells-item-table-container .srui-table {
     margin-top: 20px;
 }
-.admission-form img, .admission-form .file-input-wrapper {
+.create-edit-form img, .create-edit-form .file-input-wrapper {
     width: 100%;
 }
 /*Tables*/

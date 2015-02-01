@@ -58,7 +58,8 @@ class BeneficiaryController extends \BaseController {
         }
         $rules = array(
             'phone' => 'required|unique:beneficiaries,phone'.($beneficiary->id ? ",$beneficiary->id" : ""),
-            'email' => 'email'
+            'email' => 'email',
+            'image' => 'image'
         );
         if(!$beneficiary->id) {
             $rules['join_date'] = 'required';
@@ -67,7 +68,8 @@ class BeneficiaryController extends \BaseController {
         if($validator->fails()) {
             return array('status' => 'error', 'message' => $validator->messages()->all());
         }
-        DB::transaction(function() use ($beneficiary, $inputs){
+        $image = Input::file("image");
+        DB::transaction(function() use ($beneficiary, $inputs, $image){
             $beneficiary->name = $inputs["name"];
             $beneficiary->phone = $inputs["phone"];
             $beneficiary->email = $inputs["email"];
@@ -77,6 +79,7 @@ class BeneficiaryController extends \BaseController {
             $beneficiary->status = "A";
             $beneficiary->sex = $inputs['sex'];
             $beneficiary->campus = $inputs['campus'];
+            $beneficiary->bank_account = $inputs['bank_account'];
             $beneficiary->type = intval($inputs["type"]);
             $beneficiary->employee_id = intval($inputs["employee_id"]);
             if(!$beneficiary->id) {
@@ -85,6 +88,9 @@ class BeneficiaryController extends \BaseController {
                 $beneficiary->salary = floatval($inputs["salary"]);
                 $beneficiary->join_date = $date;
                 $beneficiary->last_increment_date = $date;
+            }
+            if($image) {
+                $beneficiary->image = $image->getClientOriginalName();
             }
             $beneficiary->save();
             $beneficiary->educations->each(function($education) {
@@ -101,6 +107,13 @@ class BeneficiaryController extends \BaseController {
                 $education->grade = $grades[$i];
                 $education->beneficiary_id = $beneficiary->id;
                 $education->save();
+            }
+            if($image) {
+                $fileName = storage_path()."/images/employee/$beneficiary->id/";
+                if(File::exists($fileName)) {
+                    File::deleteDirectory($fileName);
+                }
+                $image->move(storage_path()."/images/employee/$beneficiary->id/", $image->getClientOriginalName());
             }
         });
         return array('status' => 'success', 'message' => "Beneficiary has been created successfully");

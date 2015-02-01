@@ -14,7 +14,8 @@ class CommonService {
             '20' => '20',
             '25' => '25',
             '50' => '50',
-            '100' => '100'
+            '100' => '100',
+            '200' => '200'
         );
         foreach($array as $key => $value) {
             $class = intval($value) == $max ? "selected" : "";
@@ -29,7 +30,10 @@ class CommonService {
         $noOfPage = ceil($total/$max);
         $class = $currentPage == 1 ? "disabled" : "";
         $html =  $html."<li page='prev' class='$class'><a>&laquo;</a></li>".PHP_EOL;
-        for($i = 1; $i <= $noOfPage; $i++) {
+        $d = $currentPage < 5 ? 10 - $currentPage : 5;
+        $n = ($currentPage + $d) > $noOfPage ? $noOfPage : ($currentPage + $d);
+        $i = $currentPage - 5 > 0 ? $currentPage - 5 : 1;
+        for(; $i <= $n; $i++) {
             $class = $i == $currentPage ? "active" : "";
             $html =  $html."<li page='$i' class='$class' ><a>$i</a></li>".PHP_EOL;
         }
