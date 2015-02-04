@@ -81,6 +81,7 @@
         'IncomeEntryController'=> array(
             'getLoadTable' => "View All incomes Entry",
             'getCreate' => 'Create New Income Entry',
+            'postSave' => 'Save Income Information',
             'getDateselect' => 'Choose Date for Report',
             'postReport' => 'Create Report'
         ),
@@ -94,6 +95,10 @@
             'getCreatePayment' => "Receive Payment Form",
             'postSavePayment' => "Save Payment",
             'getPaymentHistory' => "View Payment history"
+        ),
+        "OthersController" => array(
+            'getLoadTable' => "View All Data",
+            'getCreate' => "Create Entry"
         ),
         "PackageController" => array(
             'getLoadTable' => "View All Packages",
@@ -117,7 +122,7 @@
             'postSave' => "Save Registration"
         ),
         "SalaryController" => array(
-            'getTableView' => "View All Salary History",
+            'getLoadTable' => "View All Salary History",
             'getReportForm' => "Report Form",
             'postReport' => "Generate Report",
             'getView' => "View Details"

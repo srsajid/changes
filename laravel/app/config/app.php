@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'joy bangla 1971',
+	'key' => 'uoIynzi4du0Eu7hWx2j9xG48Hv650Nsz',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
