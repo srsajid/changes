@@ -74,13 +74,8 @@ class SellsController extends BaseController {
         if(!$sell) {
             return;
         }
-//        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
         $html = View::make("sells.pdf", array('sell' => $sell));
         return $html;
-//        $pdf = new DOMPDF();
-//        $pdf->load_html($html);
-//        $pdf->render();
-//        $pdf->stream("$sell->id-sells.pdf", array('Attachment'=>0));
     }
 
     public function view() {
@@ -117,12 +112,7 @@ class SellsController extends BaseController {
             return "invalid query";
         }
         $sells = Sell::with("items")->whereRaw($query, $array)->get();
-//        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
         $html =  View::make("sells.report", array('sells' => $sells, 'to' => $to, 'from' => $from));
         return $html;
-//        $pdf = new DOMPDF();
-//        $pdf->load_html($html);
-//        $pdf->render();
-//        $pdf->stream("Report.pdf", array('Attachment'=>0));
     }
 }
