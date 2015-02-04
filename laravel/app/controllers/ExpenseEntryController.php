@@ -82,7 +82,7 @@ class ExpenseEntryController extends BaseController {
         foreach($incomes as $inc) {
             $allIncome[$inc->name()] = $inc->amount;
         }*/
-        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
+//        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
         $html =  View::make("expenseEntry.report", array('expenses' => $expenses, 'to' => $to, 'from' => $from));
         return $html;
     }

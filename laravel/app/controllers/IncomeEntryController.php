@@ -90,7 +90,7 @@ class IncomeEntryController extends BaseController {
         foreach($incomes as $inc) {
             $allIncome[$inc->name()] = $inc->amount;
         }*/
-        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
+        //require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
         $html =  View::make("incomeEntry.report", array('incomes' => $incomes, 'to' => $to, 'from' => $from));
         return $html;
     }
