@@ -81,7 +81,7 @@ class BeneficiaryController extends \BaseController {
             $beneficiary->campus = $inputs['campus'];
             $beneficiary->bank_account = $inputs['bank_account'];
             $beneficiary->type = intval($inputs["type"]);
-            $beneficiary->employee_id = intval($inputs["employee_id"]);
+            $beneficiary->employee_id = $inputs["employee_id"];
             if(!$beneficiary->id) {
                 $date = date_create_from_format('m/d/Y', $inputs['join_date']);
                 $date = date_format($date, 'Y-m-d');

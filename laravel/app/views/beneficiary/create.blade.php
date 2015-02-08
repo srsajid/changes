@@ -70,7 +70,7 @@
         </div>
     @endif
     <div class="form-group">
-        <label class="col-sm-2 control-label">Sex:</label>
+        <label class="col-sm-2 control-label">Campus:</label>
         <div class="col-sm-10">
             {{Form::select('campus', array('campus_1' => "Campus 1", 'campus_2' => "Campus 2"), $beneficiary->campus, array('class' => "form-control"))}}
         </div>
@@ -78,7 +78,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Type:</label>
         <div class="col-sm-10">
-            {{Form::select('type', OSMS::$BENEFICIARY_TYPE, null, array('class' => 'form-control'))}}
+            {{Form::select('type', OSMS::$BENEFICIARY_TYPE, $beneficiary->type, array('class' => 'form-control'))}}
         </div>
     </div>
     <div class="form-group">

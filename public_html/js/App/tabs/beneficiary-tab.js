@@ -104,7 +104,7 @@ _b.createEditBeneficiary = function (id){
                 var $this = $(this);
                 degrees.push($this.find(".degree").text());
                 institutions.push($this.find(".institution").text());
-                grades.push($this.find(".grades").text());
+                grades.push($this.find(".grade").text());
             });
             ajaxSetting.data = {
                 degrees: JSON.stringify(degrees),
