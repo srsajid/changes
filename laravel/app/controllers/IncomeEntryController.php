@@ -85,7 +85,7 @@ class IncomeEntryController extends BaseController {
         if(strlen($query) <= 0) {
             return "invalid query";
         }
-        $incomes = IncomeEntry::whereRaw($query, $array)->orderBy('created_at', 'ASC')->get();
+        $incomes = IncomeEntry::whereRaw($query, $array)->orderBy('income_type_id', 'ASC')->get();
         /*$allIncome = (array) null;
         foreach($incomes as $inc) {
             $allIncome[$inc->name()] = $inc->amount;
