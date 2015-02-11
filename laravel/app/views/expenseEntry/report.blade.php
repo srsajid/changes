@@ -72,8 +72,6 @@
     <table id="hor-minimalist-a">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Date</th>
             <th>Type</th>
             <th>Total</th>
         </tr>
@@ -87,15 +85,11 @@
             $totals = $totals + $total;
             ?>
             <tr>
-                <td><?php echo $expense->id;?></td>
-                <td><?php echo date("d/m/Y", strtotime($expense->created_at)); ?></td>
-                <td><?php echo $expense->name(); ?></td>
+                <td><?php echo $expense->typeName; ?></td>
                 <td><?php echo $expense->amount;?></td>
             </tr>
         <?php } ?>
         <tr>
-            <td></td>
-            <td></td>
             <td class="last">Total:</td>
             <td class="last"><?php echo $totals; ?></td>
         </tr>
