@@ -74,24 +74,26 @@ class IncomeEntryController extends BaseController {
         $flag = false;
         if($from) {
             array_push($array, new DateTime($from."00:00:00"));
-            $query = $query."created_at >= ?";
+            $query = $query."income_entries.created_at >= ?";
             $flag = true;
         }
         if($to) {
             array_push($array, new DateTime($to."23:59:59"));
             $query = $query.($flag ? " and " : "");
-            $query = $query."created_at <= ?";
+            $query = $query."income_entries.created_at <= ?";
         }
         if(strlen($query) <= 0) {
             return "invalid query";
         }
-        $incomes = IncomeEntry::whereRaw($query, $array)->orderBy('income_type_id', 'ASC')->get();
+
+         $testIncomes = DB::table("income_entries")->select(DB::raw("income_types.name as typeName sum(income_entries.amount) as amount"))->join("income_types","income_entries.income_type_id","=","income_types.id")->where($query, $array)->get();
+//        $incomes = IncomeEntry::whereRaw($query, $array)->orderBy('income_type_id', 'ASC')->get();
         /*$allIncome = (array) null;
         foreach($incomes as $inc) {
             $allIncome[$inc->name()] = $inc->amount;
         }*/
         //require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
-        $html =  View::make("incomeEntry.report", array('incomes' => $incomes, 'to' => $to, 'from' => $from));
+        $html =  View::make("incomeEntry.report", array('incomes' => $testIncomes, 'to' => $to, 'from' => $from));
         return $html;
     }
 }
