@@ -86,7 +86,7 @@ class IncomeEntryController extends BaseController {
             return "invalid query";
         }
 
-         $testIncomes = DB::table("income_entries")->select(DB::raw("income_types.name as typeName sum(income_entries.amount) as amount"))->join("income_types","income_entries.income_type_id","=","income_types.id")->where($query, $array)->get();
+         $testIncomes = DB::table("income_entries")->select(DB::raw("income_types.name as typeName, sum(income_entries.amount) as amount"))->join("income_types","income_entries.income_type_id","=","income_types.id")->whereRaw($query, $array)->groupBy("income_entries.income_type_id")->get();
 //        $incomes = IncomeEntry::whereRaw($query, $array)->orderBy('income_type_id', 'ASC')->get();
         /*$allIncome = (array) null;
         foreach($incomes as $inc) {
