@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'local',
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,8 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => 'www.changesschool.org',
+//			'host'      => 'localhost',
 			'database'  => 'changess_osms',
 			'username'  => 'changess_root',
 			'password'  => 'p@ssw0rd',
