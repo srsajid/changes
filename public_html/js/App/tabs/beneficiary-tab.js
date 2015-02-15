@@ -35,7 +35,7 @@ _b.createEditBeneficiary = function (id){
     var _self = this;
     var title = id ? "Edit Beneficiary" : "Create Beneficiary";
     var rowTemplate = '<tr class="education"><td class="degree">#DEGREE#</td>' +
-        '<td class="institution">#INSTITUTION#</td><td class="grade">#GRADE#</td>' +
+        '<td class="institution">#INSTITUTION#</td><td class="board">#BOARD#</td><td class="grade">#GRADE#</td>' +
         '<td><span class="glyphicon glyphicon-pencil edit"><span class="glyphicon glyphicon-remove remove"></span></td>' +
         '</tr>';
     util.editPopup(title, App.baseUrl+ "beneficiary/create", {
@@ -47,7 +47,7 @@ _b.createEditBeneficiary = function (id){
         after_load: function() {
             var popup = this, educationTable = popup.find("table"), lastRow = educationTable.find(".last-row"), editionRow;
             var degree = lastRow.find('[name=degree]'), institution = lastRow.find('[name=institution]'),
-                grade = lastRow.find('[name=grade]');
+                board = lastRow.find('[name=board]'), grade = lastRow.find('[name=grade]');
             lastRow.on("keydown", function(e) {
                 if(e.keyCode == 13) {
                     lastRow.find(".add").trigger("click")
@@ -62,6 +62,7 @@ _b.createEditBeneficiary = function (id){
                     degree.val(row.find(".degree").text());
                     institution.val(row.find(".institution").text());
                     grade.val(row.find(".grade").text());
+                    board.val(row.find(".board").text());
                     editionRow = row;
                 })
             }
@@ -70,7 +71,7 @@ _b.createEditBeneficiary = function (id){
             });
             lastRow.find('.add').on("click", function() {
                 if(degree.val() && institution.val()) {
-                    var row = $(rowTemplate.replace("#DEGREE#", degree.val()).replace("#INSTITUTION#", institution.val()).replace("#GRADE#", grade.val()));
+                    var row = $(rowTemplate.replace("#DEGREE#", degree.val()).replace("#INSTITUTION#", institution.val()).replace("#BOARD#", board.val()).replace("#GRADE#", grade.val()));
                     attachRowEvent(row)
                     if(editionRow) {
                         editionRow.replaceWith(row);
@@ -80,6 +81,7 @@ _b.createEditBeneficiary = function (id){
                     }
                     degree.val("");
                     institution.val("")
+                    board.val("")
                     grade.val("");
                 }
             });
@@ -99,16 +101,18 @@ _b.createEditBeneficiary = function (id){
             })
         },
         preSubmit: function(ajaxSetting) {
-            var popup = this, educationTable = popup.find("table"), degrees = [], institutions = [], grades = [];
+            var popup = this, educationTable = popup.find("table"), degrees = [], institutions = [], boards = [], grades = [];
             educationTable.find("tr:gt(0):not(.last-row)").each(function() {
                 var $this = $(this);
                 degrees.push($this.find(".degree").text());
                 institutions.push($this.find(".institution").text());
+                boards.push($this.find(".board").text());
                 grades.push($this.find(".grade").text());
             });
             ajaxSetting.data = {
                 degrees: JSON.stringify(degrees),
                 institutions: JSON.stringify(institutions),
+                boards: JSON.stringify(boards),
                 grades: JSON.stringify(grades)
             };
         }

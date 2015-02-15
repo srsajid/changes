@@ -76,6 +76,9 @@ class BeneficiaryController extends \BaseController {
             $beneficiary->designation = $inputs["designation"];
             $beneficiary->address_1 = $inputs["address_1"];
             $beneficiary->address_2 = $inputs["address_2"];
+            $beneficiary->father_name = $inputs["father_name"];
+            $beneficiary->mother_name = $inputs["mother_name"];
+            $beneficiary->national_id = $inputs["national_id"];
             $beneficiary->status = "A";
             $beneficiary->sex = $inputs['sex'];
             $beneficiary->campus = $inputs['campus'];
@@ -99,12 +102,14 @@ class BeneficiaryController extends \BaseController {
             $degrees = json_decode($inputs["degrees"]);
             $institutions = json_decode($inputs["institutions"]);
             $grades = json_decode($inputs["grades"]);
+            $boards = json_decode($inputs["boards"]);
             $size = count($degrees);
             for($i = 0; $i < $size; $i++ ) {
                 $education = new Education();
                 $education->degree = $degrees[$i];
                 $education->institution = $institutions[$i];
                 $education->grade = $grades[$i];
+                $education->board = $boards[$i];
                 $education->beneficiary_id = $beneficiary->id;
                 $education->save();
             }

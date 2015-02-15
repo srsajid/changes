@@ -29,13 +29,32 @@
          <div class="col-sm-10">
              <input class="form-control" name="address_2" value="{{$beneficiary->address_2}}">
          </div>
+    </div> 
+    <div class="form-group">
+         <label class="col-sm-2 control-label">Father Name:</label>
+         <div class="col-sm-10">
+             <input class="form-control" name="father_name" value="{{$beneficiary->father_name}}">
+         </div>
+    </div> 
+    <div class="form-group">
+         <label class="col-sm-2 control-label">Mother Name:</label>
+         <div class="col-sm-10">
+             <input class="form-control" name="mother_name" value="{{$beneficiary->mother_name}}">
+         </div>
     </div>  
     <div class="form-group">
          <label class="col-sm-2 control-label">Bank Ac No:</label>
          <div class="col-sm-10">
              <input class="form-control" name="bank_account" value="{{$beneficiary->bank_account}}">
          </div>
+    </div>  
+    <div class="form-group">
+         <label class="col-sm-2 control-label">National Id or Passport:</label>
+         <div class="col-sm-10">
+             <input class="form-control" name="national_id" value="{{$beneficiary->national_id}}">
+         </div>
     </div>
+    
     <div class="form-group">
         <label class="col-sm-2 control-label">Sex:</label>
         <div class="col-sm-10">
@@ -95,11 +114,13 @@
                     <col style="width: 20%"/>
                     <col style=""/>
                     <col style="width: 15%"/>
+                    <col style="width: 15%"/>
                     <col style="width: 10%"/>
                </colgroup>
                <tr>
                    <th>Degree</th>
                    <th>Institution</th>
+                   <th>Board</th>
                    <th>Grade</th>
                    <th>action</th>
                </tr>
@@ -107,6 +128,7 @@
                     <tr class="education">
                         <td class="degree">{{$education->degree}}</td>
                         <td class="institution">{{$education->institution}}</td>
+                        <td class="board">{{$education->board}}</td>
                         <td class="grade">{{$education->grade}}</td>
                         <td>
                             <span class="glyphicon glyphicon-pencil edit"></span>
@@ -117,6 +139,7 @@
                <tr class="last-row">
                     <td><input class="form-control" type="text" name="degree"></td>
                     <td><input class="form-control" type="text" name="institution"></td>
+                    <td><input class="form-control" type="text" name="board"></td>
                     <td><input class="form-control" type="text" name="grade"></td>
                     <td>
                         <button type="button" class="btn btn-default btn-sm tool-icon add" title="Add Education">
