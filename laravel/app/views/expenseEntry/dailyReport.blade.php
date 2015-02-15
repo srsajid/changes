@@ -68,11 +68,12 @@
 </head>
 <body>
 <div class="container">
-    <h2>Expense Report - <?php echo("Date From: $from To: $to") ?></h2>
+    <h2>Expense Report - <?php echo("Date From: $from") ?></h2>
     <table id="hor-minimalist-a">
         <thead>
         <tr>
             <th>Type</th>
+            <th>Comment</th>
             <th>Total</th>
         </tr>
         </thead>
@@ -80,18 +81,20 @@
         <?php $totals = 0.0; ?>
         <?php foreach($expenses as $expense) { ?>
 
-            <?php
-            $total = $expense->amount;
-            $totals = $totals + $total;
-            ?>
-            <tr>
-                <td><?php echo $expense->typeName; ?></td>
-                <td><?php echo $expense->amount;?></td>
-            </tr>
+        <?php
+        $total = $expense->amount;
+        $totals = $totals + $total;
+        ?>
+        <tr>
+            <td><?php echo $expense->typeName; ?></td>
+            <td><?php echo $expense->comment;?></td>
+            <td><?php echo $expense->amount;?></td>
+        </tr>
         <?php } ?>
         <tr>
             <td class="last"></td>
-            <td class="last"><b>Total:</b>   <?php echo $totals; ?></td>
+            <td class="last"></td>
+            <td class="last"><b>Total:</b>    <?php echo $totals; ?></td>
         </tr>
         </tbody>
     </table>

@@ -21,7 +21,7 @@ class ExpenseEntryService {
         if(count($array) > 0 ) {
             $expenses = ExpenseEntry::whereRaw($query, $array)->take($max)->skip($offset);
         } else {
-            $expenses = ExpenseEntry::take($max)->skip($offset)->orderBy('id', "ASC");
+            $expenses = ExpenseEntry::take($max)->skip($offset)->orderBy('id', "DESC");
         }
         return $expenses->get();
     }

@@ -59,33 +59,44 @@ class ExpenseEntryController extends BaseController {
         return View::make("expenseEntry.dateSelection");
     }
 
-    public function postReport(){
+    public function postReport()
+    {
         $from = Input::get("from");
         $to = Input::get("to");
         $array = array();
-        $query= "";
+        $query = "";
         $flag = false;
-        if($from) {
-            array_push($array, new DateTime($from."00:00:00"));
-            $query = $query."expense_entries.created_at >= ?";
+        $fromDate = new DateTime($from);
+        $toDate = new DateTime($to);
+        if ($from) {
+            array_push($array, new DateTime($from . "00:00:00"));
+            $query = $query . "expense_entries.created_at >= ?";
             $flag = true;
         }
-        if($to) {
-            array_push($array, new DateTime($to."23:59:59"));
-            $query = $query.($flag ? " and " : "");
-            $query = $query."expense_entries.created_at <= ?";
+        if ($to) {
+            array_push($array, new DateTime($to . "23:59:59"));
+            $query = $query . ($flag ? " and " : "");
+            $query = $query . "expense_entries.created_at <= ?";
         }
-        if(strlen($query) <= 0) {
+        if (strlen($query) <= 0) {
             return "invalid query";
         }
-        $testExp = DB::table("expense_entries")->select(DB::raw("expense_types.name as typeName, sum(expense_entries.amount) as amount"))->join("expense_types","expense_entries.expense_type_id","=","expense_types.id")->whereRaw($query, $array)->groupBy("expense_entries.expense_type_id")->get();
+        if ($fromDate->diff($toDate)->days == 0 ) {
+            $testExp = DB::table("expense_entries")->select(DB::raw("expense_types.name as typeName, sum(expense_entries.amount) as amount, expense_entries.comment as comment"))->join("expense_types","expense_entries.expense_type_id","=","expense_types.id")->whereRaw($query, $array)->groupBy("expense_entries.expense_type_id")->get();
+            $html =  View::make("expenseEntry.dailyReport", array('expenses' => $testExp, 'to' => $to, 'from' => $from));
+            return $html;
+        }
+        else {
+            $testExp = DB::table("expense_entries")->select(DB::raw("expense_types.name as typeName, sum(expense_entries.amount) as amount"))->join("expense_types","expense_entries.expense_type_id","=","expense_types.id")->whereRaw($query, $array)->groupBy("expense_entries.expense_type_id")->get();
+            $html =  View::make("expenseEntry.report", array('expenses' => $testExp, 'to' => $to, 'from' => $from));
+            return $html;
+        }
 //        $expenses = ExpenseEntry::whereRaw($query, $array)->orderBy('created_at', 'ASC')->get();
         /*$allIncome = (array) null;
         foreach($incomes as $inc) {
             $allIncome[$inc->name()] = $inc->amount;
         }*/
 //        require_once(base_path()."/vendor/dompdf/dompdf/dompdf_config.inc.php");
-        $html =  View::make("expenseEntry.report", array('expenses' => $testExp, 'to' => $to, 'from' => $from));
-        return $html;
+
     }
 }

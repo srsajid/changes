@@ -21,7 +21,7 @@ class IncomeService {
         if(count($array) > 0 ) {
             $incomes = Income_type::whereRaw($query, $array)->take($max)->skip($offset);
         } else {
-            $incomes = Income_type::take($max)->skip($offset)->orderBy('id', "ASC");
+            $incomes = Income_type::take($max)->skip($offset)->orderBy('id', "DESC");
         }
         return $incomes->get();
     }

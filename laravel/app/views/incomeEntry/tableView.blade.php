@@ -32,6 +32,7 @@
         <thead>
         <tr>
             <th>Id</th>
+            <th>Date</th>
             <th>Type</th>
             <th>Amount</th>
         </tr>
@@ -40,6 +41,7 @@
         <?php $incomeE->each(function($incomeE){ ?>
             <tr class="active">
                 <td><?php echo $incomeE->id; ?></td>
+                <td><?php echo date("d-m-Y", strtotime($incomeE->created_at)); ?></td>
                 <td><?php echo $incomeE->incomeType->name ?></td>
                 <td><?php echo $incomeE->amount; ?></td>
             </tr>
