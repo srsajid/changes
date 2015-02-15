@@ -46,7 +46,7 @@ class ExpenseEntryService {
             $expense = new ExpenseEntry();
             $expense->expense_type_id = $expense_type;
             $expense->amount = $amount;
-            $expense->details = $details;
+            $expense->comment = $details;
             $expense->user_id = $user->id;
             $expense->save();
         });
