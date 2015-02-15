@@ -111,8 +111,9 @@
        <div class="col-lg-10">
             <table class="table">
                <colgroup>
-                    <col style="width: 20%"/>
+                    <col style="width: 10%"/>
                     <col style=""/>
+                    <col style="width: 15%"/>
                     <col style="width: 15%"/>
                     <col style="width: 15%"/>
                     <col style="width: 10%"/>
@@ -121,6 +122,7 @@
                    <th>Degree</th>
                    <th>Institution</th>
                    <th>Board</th>
+                   <th>Passed Year</th>
                    <th>Grade</th>
                    <th>action</th>
                </tr>
@@ -129,6 +131,7 @@
                         <td class="degree">{{$education->degree}}</td>
                         <td class="institution">{{$education->institution}}</td>
                         <td class="board">{{$education->board}}</td>
+                        <td class="board">{{$education->passed_year}}</td>
                         <td class="grade">{{$education->grade}}</td>
                         <td>
                             <span class="glyphicon glyphicon-pencil edit"></span>
@@ -140,6 +143,7 @@
                     <td><input class="form-control" type="text" name="degree"></td>
                     <td><input class="form-control" type="text" name="institution"></td>
                     <td><input class="form-control" type="text" name="board"></td>
+                    <td><input class="form-control" type="text" name="passed"></td>
                     <td><input class="form-control" type="text" name="grade"></td>
                     <td>
                         <button type="button" class="btn btn-default btn-sm tool-icon add" title="Add Education">
