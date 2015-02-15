@@ -45,8 +45,9 @@ class ExpenseEntryController extends BaseController {
         }
         $id = Input::get("expenseType");
         $amount = Input::get("amount");
+        $details = Input::get("details");
         $expense_type_id = Input::get("expenseType");
-        if(ExpenseEntryService::saveExpenseEntry($id,$amount,$expense_type_id)){
+        if(ExpenseEntryService::saveExpenseEntry($id,$amount,$expense_type_id,$details)){
             return array('status' => 'success', 'message' => 'Expense entry has been successfully saved');
         }
         else{
