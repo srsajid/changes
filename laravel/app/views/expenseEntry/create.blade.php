@@ -12,8 +12,15 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-sm-2 control-label">Details:</label>
+        <div class="col-sm-10">
+            <textarea type="text" name="details" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-sm-offset-10 col-sm-2">
             <button type="submit" class="btn btn-default">Create</button>
         </div>
     </div>
+
 </form>
