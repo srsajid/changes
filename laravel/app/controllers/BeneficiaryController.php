@@ -103,6 +103,7 @@ class BeneficiaryController extends \BaseController {
             $institutions = json_decode($inputs["institutions"]);
             $grades = json_decode($inputs["grades"]);
             $boards = json_decode($inputs["boards"]);
+            $passed_years = json_decode($inputs["passed_years"]);
             $size = count($degrees);
             for($i = 0; $i < $size; $i++ ) {
                 $education = new Education();
@@ -110,6 +111,7 @@ class BeneficiaryController extends \BaseController {
                 $education->institution = $institutions[$i];
                 $education->grade = $grades[$i];
                 $education->board = $boards[$i];
+                $education->passed_year = $passed_years[$i];
                 $education->beneficiary_id = $beneficiary->id;
                 $education->save();
             }
